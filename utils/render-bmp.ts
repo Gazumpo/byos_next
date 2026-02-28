@@ -52,7 +52,7 @@ const applyFloydSteinberg = (
 	width: number,
 	height: number,
 	grayscaleLevels: number = 2,
-	inverted: boolean = false,
+	inverted: boolean = true,
 ): Uint8Array => {
 	// Create a copy of the grayscale array to avoid modifying the original
 	const result = new Uint8Array(grayscale.length);
@@ -93,7 +93,7 @@ const applyAtkinson = (
 	width: number,
 	height: number,
 	grayscaleLevels: number = 2,
-	inverted: boolean = false,
+	inverted: boolean = true,
 ): Uint8Array => {
 	// Create a copy of the grayscale array to avoid modifying the original
 	const result = new Uint8Array(grayscale.length);
@@ -135,7 +135,7 @@ const applyBayer = (
 	height: number,
 	grayscaleLevels: number = 2,
 	patternSize: number = 8,
-	inverted: boolean = false,
+	inverted: boolean = true,
 ): Uint8Array => {
 	const result = new Uint8Array(grayscale.length);
 
@@ -176,7 +176,7 @@ const applyRandom = (
 	_width: number,
 	_height: number,
 	grayscaleLevels: number = 2,
-	inverted: boolean = false,
+	inverted: boolean = true,
 ): Uint8Array => {
 	const result = new Uint8Array(grayscale.length);
 
@@ -200,7 +200,7 @@ const applyDithering = (
 	height: number,
 	method: DitheringMethod = DitheringMethod.FLOYD_STEINBERG,
 	grayscaleLevels: number = 2,
-	inverted: boolean = false,
+	inverted: boolean = true,
 ): Uint8Array => {
 	switch (method) {
 		case DitheringMethod.FLOYD_STEINBERG:
@@ -239,7 +239,7 @@ export interface RenderBmpOptions {
 export async function renderBmp(png: Buffer, options: RenderBmpOptions = {}) {
 	const {
 		ditheringMethod = DitheringMethod.FLOYD_STEINBERG,
-		inverted = false,
+		inverted = true,
 		grayscale = 2, // Default to 2 levels (black/white)
 	} = options;
 

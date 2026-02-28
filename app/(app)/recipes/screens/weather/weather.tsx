@@ -29,6 +29,7 @@ interface WeatherProps {
 	pressure?: string;
 	sunset?: string;
 	sunrise?: string;
+	uv_index_max?: string;
 	latitude?: number;
 	longitude?: number;
 	width?: number;
@@ -48,15 +49,14 @@ export default function Weather({
 	pressure = "Loading...",
 	sunset = "Loading...",
 	sunrise = "Loading...",
+	uv_index_max = "Loading...",
 	width = 800,
 	height = 480,
 }: WeatherProps) {
 	// Weather statistics
 	const weatherStats = [
-		{ label: "Feels Like", value: `${feelsLike}°C`, icon: tempIcon },
-		{ label: "Humidity", value: `${humidity}%`, icon: humidityIcon },
 		{ label: "Wind Speed", value: `${windSpeed} km/h`, icon: windIcon },
-		{ label: "Pressure", value: `${pressure} hPa`, icon: pressureIcon },
+		{ label: "UV Index", value: `${uv_index_max}`, icon: sunriseIcon },
 		{ label: "Sunrise", value: `${sunrise}`, icon: sunriseIcon },
 		{ label: "Sunset", value: `${sunset}`, icon: sunsetIcon },
 	];
@@ -75,31 +75,41 @@ export default function Weather({
 		return CloudIcon; // default
 	};
 
-	const isHalfScreen = width === 400 && height === 480;
+	const isHalfScreen = width <= 400;
+	const isNarrow = width < 640;
 
 	return (
 		<PreSatori width={width} height={height}>
 			<div className="flex flex-col w-full h-full bg-white">
-				<div
-					className={`flex p-4 sm:flex-row items-center justify-between ${isHalfScreen ? "flex-row" : "flex-col sm:flex-row"}`}
-				>
-					<h2
-						className={`font-inter ${isHalfScreen ? "text-8xl" : "text-9xl"}`}
+				{isHalfScreen ? (
+					<div className="flex flex-col p-4 items-center">
+						<div className="flex flex-row items-center gap-4">
+							<h2 className="font-inter text-6xl">{temperature}°C</h2>
+							{getWeatherIcon(description)}
+						</div>
+						<div className="text-5xl mt-3 font-blockkie">
+							<div className="flex flex-row items-center">
+								{tempUp} {highTemp}°C
+								{tempDown} {lowTemp}°C
+							</div>
+						</div>
+					</div>
+				) : (
+					<div
+						className={`flex p-4 items-center ${isNarrow ? "flex-col gap-4" : "flex-row justify-between"}`}
 					>
-						{temperature}°C
-					</h2>
-					<div className="flex flex-col items-center justify-center">
+						<h2 className="font-inter text-8xl">{temperature}°C</h2>
 						{getWeatherIcon(description)}
-						{!isHalfScreen && (
-							<div className="text-4xl mt-4 font-blockkie">
+						<div className="flex flex-col items-center justify-center">
+							<div className="text-5xl mt-4 font-blockkie">
 								<div className="flex flex-row items-center">
 									{tempUp} {highTemp}°C
 									{tempDown} {lowTemp}°C
 								</div>
 							</div>
-						)}
+						</div>
 					</div>
-				</div>
+				)}
 				<div className="p-4 flex flex-col flex-1">
 					<div
 						className={`w-full flex flex-col flex-1 mb-4 ${isHalfScreen ? "gap-2" : "gap-4"} grid grid-cols-2 sm:grid-cols-3`}
@@ -124,10 +134,6 @@ export default function Weather({
 								</div>
 							</div>
 						))}
-					</div>
-					<div className="w-full flex flex-col sm:flex-row  sm:justify-between items-center text-2xl text-white p-2 rounded-xl bg-gray-500">
-						<div>{location}</div>
-						<div>{lastUpdated && <span>Last updated: {lastUpdated}</span>}</div>
 					</div>
 				</div>
 			</div>

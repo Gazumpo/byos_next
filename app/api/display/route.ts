@@ -166,6 +166,7 @@ export async function GET(request: Request) {
 
 		// Update device status in background
 		updateDeviceStatus(device, headers, dynamicRefreshRate);
+		const filenameStem = (screenToDisplay || "not-found").replaceAll("/", "_");
 		const metadata = {
 			deviceId: device.friendly_id,
 			screen: screenToDisplay,
@@ -176,7 +177,7 @@ export async function GET(request: Request) {
 
 		return buildDisplayResponse(
 			imageUrl,
-			`${screenToDisplay || "not-found"}_${uniqueId}.bmp`,
+			`${filenameStem}_${uniqueId}.bmp`,
 			dynamicRefreshRate,
 		);
 	} catch (_error) {

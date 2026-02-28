@@ -20,6 +20,21 @@ CREATE TABLE IF NOT EXISTS playlist_items (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 -- Update devices table
-ALTER TABLE devices
-ADD COLUMN playlist_id UUID REFERENCES playlists(id),
-    ADD COLUMN use_playlist BOOLEAN DEFAULT FALSE;
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'devices' AND column_name = 'playlist_id'
+  ) THEN
+    ALTER TABLE devices
+      ADD COLUMN playlist_id UUID REFERENCES playlists(id);
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_name = 'devices' AND column_name = 'use_playlist'
+  ) THEN
+    ALTER TABLE devices
+      ADD COLUMN use_playlist BOOLEAN DEFAULT FALSE;
+  END IF;
+END $$;

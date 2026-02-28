@@ -4,8 +4,11 @@ import screens from "@/app/(app)/recipes/screens.json";
 import { fetchPlaylistWithItems } from "@/app/actions/playlist";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Mixup } from "@/lib/types";
 import { PlaylistForm } from "./playlist-form";
 import { PlaylistItem } from "./playlist-item";
+
+const EMPTY_MIXUPS: Mixup[] = [];
 
 interface PlaylistEditorProps {
 	playlist?: {
@@ -35,12 +38,14 @@ interface PlaylistEditorProps {
 		}>;
 	}) => void;
 	onCancel: () => void;
+	availableMixups?: Mixup[];
 }
 
 export function PlaylistEditor({
 	playlist,
 	onSave,
 	onCancel,
+	availableMixups = EMPTY_MIXUPS,
 }: PlaylistEditorProps) {
 	const [name, setName] = useState(playlist?.name || "");
 	const [items, setItems] = useState(playlist?.items || []);
@@ -91,12 +96,18 @@ export function PlaylistEditor({
 		loadItems();
 
 		setScreenOptions(
-			Object.entries(screens).map(([id, config]) => ({
-				id,
-				name: config.title,
-			})),
+			[
+				...Object.entries(screens).map(([id, config]) => ({
+					id,
+					name: config.title,
+				})),
+				...availableMixups.map((mixup) => ({
+					id: `mixup/${mixup.id}`,
+					name: `Mixup: ${mixup.name}`,
+				})),
+			].sort((a, b) => a.name.localeCompare(b.name)),
 		);
-	}, [playlist?.id, playlist?.items]);
+	}, [availableMixups, playlist?.id, playlist?.items]);
 
 	const handleSavePlaylist = (data: { name: string }) => {
 		setName(data.name);

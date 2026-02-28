@@ -8,11 +8,12 @@ import {
 	DEFAULT_IMAGE_HEIGHT,
 	DEFAULT_IMAGE_WIDTH,
 } from "@/lib/recipes/constants";
-import { Playlist, PlaylistItem } from "@/lib/types";
+import type { Mixup, Playlist, PlaylistItem } from "@/lib/types";
 
 interface PlaylistListProps {
 	playlists: Playlist[];
 	playlistItems: PlaylistItem[];
+	mixups?: Mixup[];
 	onEditPlaylist?: (playlist: Playlist) => void;
 	onDeletePlaylist?: (playlistId: string) => void;
 	isLoading?: boolean;
@@ -21,6 +22,7 @@ interface PlaylistListProps {
 export function PlaylistList({
 	playlists,
 	playlistItems,
+	mixups = [],
 	onEditPlaylist,
 	onDeletePlaylist,
 	isLoading = false,
@@ -45,8 +47,21 @@ export function PlaylistList({
 		{},
 	);
 
-	const getScreenTitle = (screenId: string) =>
-		screens[screenId as keyof typeof screens]?.title || screenId;
+	const mixupsById = mixups.reduce<Record<string, Mixup>>((acc, mixup) => {
+		acc[mixup.id] = mixup;
+		return acc;
+	}, {});
+
+	const getScreenTitle = (screenId: string) => {
+		if (screenId.startsWith("mixup/")) {
+			const mixupId = screenId.slice("mixup/".length);
+			const mixup = mixupsById[mixupId];
+			if (mixup) return `Mixup: ${mixup.name}`;
+			return `Mixup: ${mixupId.slice(0, 8)}`;
+		}
+
+		return screens[screenId as keyof typeof screens]?.title || screenId;
+	};
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

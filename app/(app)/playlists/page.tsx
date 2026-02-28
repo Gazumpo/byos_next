@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function PlaylistsPage() {
-	const { playlists, playlistItems } = await getInitData();
+	const { playlists, playlistItems, mixups } = await getInitData();
 
 	return (
 		<div className="space-y-6">
@@ -25,6 +25,7 @@ export default async function PlaylistsPage() {
 				<PlaylistPageClient
 					initialPlaylists={playlists}
 					initialPlaylistItems={playlistItems}
+					initialMixups={mixups}
 				/>
 			</Suspense>
 		</div>

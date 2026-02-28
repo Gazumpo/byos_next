@@ -5,22 +5,25 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { deletePlaylist, savePlaylistWithItems } from "@/app/actions/playlist";
 import { Button } from "@/components/ui/button";
-import { Playlist, PlaylistItem } from "@/lib/types";
+import { Mixup, Playlist, PlaylistItem } from "@/lib/types";
 import { PlaylistEditor } from "./playlist-editor";
 import { PlaylistList } from "./playlist-list";
 
 interface PlaylistPageClientProps {
 	initialPlaylists: Playlist[];
 	initialPlaylistItems: PlaylistItem[];
+	initialMixups?: Mixup[];
 }
 
 export function PlaylistPageClient({
 	initialPlaylists,
 	initialPlaylistItems,
+	initialMixups = [],
 }: PlaylistPageClientProps) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [playlists, _setPlaylists] = useState(initialPlaylists);
 	const [playlistItems] = useState(initialPlaylistItems);
+	const [mixups] = useState(initialMixups);
 	const [showEditor, setShowEditor] = useState(false);
 	const [editingPlaylist, setEditingPlaylist] = useState<
 		(Playlist & { items?: PlaylistItem[] }) | null
@@ -145,6 +148,7 @@ export function PlaylistPageClient({
 					}
 					onSave={handleSavePlaylist}
 					onCancel={handleCancel}
+					availableMixups={mixups}
 				/>
 			</div>
 		);
@@ -162,6 +166,7 @@ export function PlaylistPageClient({
 			<PlaylistList
 				playlists={playlists}
 				playlistItems={playlistItems}
+				mixups={mixups}
 				onEditPlaylist={handleEditPlaylist}
 				onDeletePlaylist={handleDeletePlaylist}
 				isLoading={isLoading}

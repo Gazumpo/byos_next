@@ -37,8 +37,8 @@ FROM base AS development
 
 ENV NODE_ENV=development
 
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+COPY --from=deps /app/node_modules ./node_modules
 
 # Production image, copy all the files and run next
 FROM base AS runner

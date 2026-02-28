@@ -1,0 +1,26 @@
+To stop:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml down
+
+To start again:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+
+If you want it in the background:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+
+Then stop the background run with:
+docker compose -f docker-compose.yml -f docker-compose.dev.yml down
+
+
+
+ssh graeme@birdnet.local
+scp -r /Users/graeme/Projects/BYOS_next/docker-compose.yml graeme@birdnet.local:/home/graeme/byos_next/docker-compose.yml
+
+scp -r "/Users/graeme/Projects/BYOS_next/app/" "graeme@birdnet.local:/home/graeme/byos_next/"
+scp -r "/Users/graeme/Projects/BYOS_next/app/(app)/recipes/screens/" "graeme@birdnet.local:/home/graeme/byos_next/app/(app)/recipes/"
+scp -r "/Users/graeme/Projects/BYOS_next/components" "graeme@birdnet.local:/home/graeme/byos_next/"
+scp -r "/Users/graeme/Projects/BYOS_next/lib" "graeme@birdnet.local:/home/graeme/byos_next/"
+
+
+to update prod. mostly the second line. 
+sudo docker compose down --rmi local
+sudo docker compose up -d --build

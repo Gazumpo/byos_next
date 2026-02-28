@@ -120,6 +120,62 @@
 		"version": "0.2.0",
 		"category": "display-components"
 	},
+	"baby": {
+		"title": "Baby Countdown",
+		"published": true,
+		"createdAt": "2026-02-07T00:00:00Z",
+		"updatedAt": "2026-02-07T00:00:00Z",
+		"description": "Shows weeks cooked since Dec 10, 2025 and weeks to go until Sep 14, 2026 with a cooked vs remaining pie chart.",
+		"componentPath": "./screens/baby",
+		"hasDataFetch": false,
+		"props": {},
+		"params": {},
+		"tags": ["countdown", "progress", "chart", "display"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.1.0",
+		"category": "display-components"
+	},
+	"word": {
+		"title": "Word Of The Day (JP)",
+		"published": true,
+		"createdAt": "2026-02-10T00:00:00Z",
+		"updatedAt": "2026-02-10T00:00:00Z",
+		"description": "A beginner-friendly Japanese word of the day: English meaning plus romaji, hiragana, and kanji with a simple example sentence.",
+		"componentPath": "./screens/word",
+		"hasDataFetch": false,
+		"props": {},
+		"params": {
+			"dayOffset": {
+				"type": "number",
+				"label": "Day offset",
+				"description": "Preview a different day (e.g. -1 for yesterday, 1 for tomorrow).",
+				"default": 0,
+				"placeholder": "0"
+			}
+		},
+		"tags": [
+			"language",
+			"japanese",
+			"word-of-the-day",
+			"beginner",
+			"education"
+		],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.1.0",
+		"category": "display-components"
+	},
 	"weather": {
 		"title": "Weather Forecast",
 		"published": true,
@@ -132,14 +188,6 @@
 			"temperature": "Loading...",
 			"description": "Loading...",
 			"location": "Loading..."
-		},
-		"params": {
-			"location": {
-				"type": "string",
-				"label": "Location",
-				"description": "City or place name to fetch weather for",
-				"default": "San Francisco"
-			}
 		},
 		"tags": ["tailwind", "weather", "api", "live-data", "configurable"],
 		"author": {
@@ -169,6 +217,50 @@
 		"version": "0.1.0",
 		"category": "display-components"
 	},
+	"trains": {
+		"title": "Train Departures",
+		"published": true,
+		"createdAt": "2026-02-07T00:00:00Z",
+		"updatedAt": "2026-02-07T00:00:00Z",
+		"description": "A component that displays upcoming train departures for Claremont Stn using Transperth live data.",
+		"componentPath": "./screens/trains",
+		"hasDataFetch": true,
+		"props": {
+			"trains": [
+				{
+					"origin": "Oakland",
+					"destination": "San Jose",
+					"time": "14:05",
+					"platform": "2"
+				},
+				{
+					"origin": "Berkeley",
+					"destination": "Sacramento",
+					"time": "14:20",
+					"platform": "4",
+					"status": "On time"
+				},
+				{
+					"origin": "Richmond",
+					"destination": "Davis",
+					"time": "14:42",
+					"platform": "1",
+					"status": "Boarding"
+				}
+			]
+		},
+		"params": {},
+		"tags": ["transport", "trains", "timetable", "configurable"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.1.0",
+		"category": "display-components"
+	},
 	"not-found": {
 		"title": "Not Found Recipe",
 		"published": true,
@@ -188,5 +280,28 @@
 		},
 		"version": "1.0.0",
 		"category": "system-components"
+	},
+	"birds": {
+		"title": "Bird Detections",
+		"published": true,
+		"createdAt": "2026-02-05T00:00:00Z",
+		"updatedAt": "2026-02-05T00:00:00Z",
+		"description": "A component that displays bird detections from BirdNET API, showing species, confidence levels, and detection times.",
+		"componentPath": "./screens/birds",
+		"hasDataFetch": true,
+		"props": {
+			"items": []
+		},
+		"params": {},
+		"tags": ["api", "live-data", "list", "birds", "wildlife"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.1.0",
+		"category": "display-components"
 	}
 }

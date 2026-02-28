@@ -18,6 +18,7 @@ interface WeatherData {
 	sunrise: string;
 	latitude: number;
 	longitude: number;
+	uv_index_max: string;
 }
 
 type WeatherParams = {
@@ -49,8 +50,16 @@ interface OpenMeteoResponse {
 		time: string[];
 		temperature_2m_max: number[];
 		temperature_2m_min: number[];
+		apparent_temperature_max: number[];
+		apparent_temperature_min: number[];
 		sunset: string[];
 		sunrise: string[];
+		uv_index_max: number[];
+	};
+	hourly: {
+		time: string[];
+		temperature_2m: number[];
+		apparent_temperature: number[];
 	};
 }
 
@@ -167,7 +176,7 @@ async function getWeatherData(
 
 		// Fetch weather data from Open-Meteo API
 		const response = await fetch(
-			`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,surface_pressure,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset,sunrise&timezone=auto`,
+			`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=apparent_temperature,apparent_temperature,temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,surface_pressure,weather_code&daily=uv_index_max,apparent_temperature_max,apparent_temperature_min,temperature_2m_max,temperature_2m_min,sunset,sunrise&hourly=apparent_temperature,temperature_2m&timezone=auto`,
 			{
 				headers: {
 					Accept: "application/json",
@@ -236,11 +245,12 @@ async function getWeatherData(
 			description: getWeatherDescription(current.weather_code),
 			location: locationName || "San Francisco, CA",
 			lastUpdated: formatDate(current.time),
-			highTemp: formatTemperature(daily.temperature_2m_max[0]),
-			lowTemp: formatTemperature(daily.temperature_2m_min[0]),
+			highTemp: formatTemperature(daily.apparent_temperature_max[0]),
+			lowTemp: formatTemperature(daily.apparent_temperature_min[0]),
 			pressure: formatPressure(current.surface_pressure),
 			sunset: formatTime(daily.sunset[0]),
 			sunrise: formatTime(daily.sunrise[0]),
+			uv_index_max: daily.uv_index_max[0].toString(),
 			latitude: latitude || 0,
 			longitude: longitude || 0,
 		};
@@ -289,6 +299,7 @@ async function fetchWeatherDataNoCache(
 			pressure: "N/A",
 			sunset: "N/A",
 			sunrise: "N/A",
+			uv_index_max: "N/A",
 			latitude: params?.latitude || 0,
 			longitude: params?.longitude || 0,
 		};
@@ -329,7 +340,7 @@ const getCachedWeatherData = unstable_cache(
 export default async function getData(
 	params?: WeatherParams,
 ): Promise<WeatherData> {
-	const locationName = params?.location || "San Francisco";
+	const locationName = "Perth";
 	const latitude = params?.latitude;
 	const longitude = params?.longitude;
 

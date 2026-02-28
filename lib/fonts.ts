@@ -8,6 +8,7 @@ const fontPaths = {
 	blockKie: path.join(process.cwd(), "public", "fonts", "BlockKie.ttf"),
 	geneva9: path.join(process.cwd(), "public", "fonts", "geneva-9.ttf"),
 	inter: path.join(process.cwd(), "public", "fonts", "Inter_18pt-Regular.ttf"),
+	notosans: path.join(process.cwd(), "public", "fonts", "NotoSansSC.ttf"),
 };
 
 // System fonts configuration
