@@ -1,8 +1,6 @@
 import { PreSatori } from "@/utils/pre-satori";
 import type { BirdData } from "./getData";
-import {
-	BirdIcon
-} from "./icons";
+import { BirdIcon } from "./icons";
 
 export default async function Birds({
 	items = [],

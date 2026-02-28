@@ -59,16 +59,10 @@ export default function Word({ width = 800, height = 480, params }: WordProps) {
 							>
 								{word.hiragana}
 							</div>
-							<div className={`text-4xl font-inter`}>
-								{word.romaji}
-							</div>
-							<div className={`text-4xl font-inter`}>
-								{word.english}
-							</div>
+							<div className={`text-4xl font-inter`}>{word.romaji}</div>
+							<div className={`text-4xl font-inter`}>{word.english}</div>
 							{word.kanji && (
-								<div className={`text-4xl font-notosans`}>
-									{word.kanji}
-								</div>
+								<div className={`text-4xl font-notosans`}>{word.kanji}</div>
 							)}
 						</div>
 
@@ -96,9 +90,7 @@ export default function Word({ width = 800, height = 480, params }: WordProps) {
 					</div>
 				</div>
 
-				<div className="flex items-stretch justify-between gap-6 pt-4 border-t-2 border-black font-inter">
-
-				</div>
+				<div className="flex items-stretch justify-between gap-6 pt-4 border-t-2 border-black font-inter"></div>
 			</div>
 		</PreSatori>
 	);

@@ -4,7 +4,8 @@
 export const SQL_STATEMENTS = {
 	"0000_initial_schema": {
 		title: "Initial Database Schema",
-		description: "Creates the complete initial database schema including UUID extension, devices, playlists, playlist_items, logs, and system_logs tables",
+		description:
+			"Creates the complete initial database schema including UUID extension, devices, playlists, playlist_items, logs, and system_logs tables",
 		sql: `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS public.devices (
@@ -84,7 +85,8 @@ CREATE INDEX IF NOT EXISTS idx_system_logs_level ON public.system_logs (level);`
 	},
 	"0001_add_device_status_fields": {
 		title: "Add Device Status Fields",
-		description: "Add battery_voltage, firmware_version, and rssi columns to the devices table",
+		description:
+			"Add battery_voltage, firmware_version, and rssi columns to the devices table",
 		sql: `-- Add battery_voltage, firmware_version, and rssi columns to the devices table
 ALTER TABLE devices 
 ADD COLUMN IF NOT EXISTS battery_voltage NUMERIC,
@@ -98,13 +100,15 @@ COMMENT ON COLUMN devices.rssi IS 'WiFi signal strength in dBm';`,
 	},
 	"0002_add_playlist_index_to_devices": {
 		title: "Add Playlist Index to Devices",
-		description: "Adds current_playlist_index column to devices table for tracking playlist position",
+		description:
+			"Adds current_playlist_index column to devices table for tracking playlist position",
 		sql: `ALTER TABLE devices
 ADD COLUMN IF NOT EXISTS current_playlist_index INT DEFAULT 0;`,
 	},
 	"0003_add_playlists": {
 		title: "Add Playlists and Playlist Items",
-		description: "Creates the playlists and playlist_items tables and adds playlist support to devices table",
+		description:
+			"Creates the playlists and playlist_items tables and adds playlist support to devices table",
 		sql: `-- playlists table
 CREATE TABLE IF NOT EXISTS playlists (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -146,7 +150,8 @@ END $$;`,
 	},
 	"0004_add_mixups": {
 		title: "Add Mixups and Display Mode",
-		description: "Creates mixups tables and replaces use_playlist with display_mode enum",
+		description:
+			"Creates mixups tables and replaces use_playlist with display_mode enum",
 		sql: `-- Create enum for layout IDs
 CREATE TYPE mixup_layout_id AS ENUM (
     'quarters',
@@ -203,7 +208,8 @@ ALTER TABLE devices DROP COLUMN IF EXISTS use_playlist;`,
 	},
 	"0005_add_screen_size_settings": {
 		title: "Add Screen Size Settings",
-		description: "Adds screen width, height, orientation, and grayscale level to devices table",
+		description:
+			"Adds screen width, height, orientation, and grayscale level to devices table",
 		sql: `-- Add screen dimensions and settings columns
 ALTER TABLE devices
 ADD COLUMN IF NOT EXISTS screen_width INTEGER DEFAULT 800,
@@ -254,7 +260,8 @@ create index "verification_identifier_idx" on "verification" ("identifier");`,
 	},
 	"0008_add_admin_plugin": {
 		title: "Add Admin Plugin Fields",
-		description: "Adds role, banned, banReason, banExpires to user table and impersonatedBy to session table for better-auth admin plugin",
+		description:
+			"Adds role, banned, banReason, banExpires to user table and impersonatedBy to session table for better-auth admin plugin",
 		sql: `-- Add admin fields to user table
 ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "role" text DEFAULT 'user';
 ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "banned" boolean DEFAULT false;
@@ -269,7 +276,8 @@ CREATE INDEX IF NOT EXISTS "user_role_idx" ON "user" ("role");`,
 	},
 	"0009_add_user_tenancy": {
 		title: "Add User Tenancy with Row Level Security",
-		description: "Adds user_id to tables, implements PostgreSQL RLS, and creates app role for RLS enforcement",
+		description:
+			"Adds user_id to tables, implements PostgreSQL RLS, and creates app role for RLS enforcement",
 		sql: `-- =============================================================================
 -- Part 1: Add user_id columns
 -- =============================================================================
@@ -417,9 +425,10 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO byos_app;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO byos_app;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO byos_app;`,
 	},
-	"validate_schema": {
+	validate_schema: {
 		title: "Validate Database Schema",
-		description: "Validates that all required tables exist in the public schema. Returns list of tables with their status and identifies any missing tables.",
+		description:
+			"Validates that all required tables exist in the public schema. Returns list of tables with their status and identifies any missing tables.",
 		sql: `-- Check for missing required tables
 -- Returns empty result if all tables exist, or rows with missing table names if any are missing
 SELECT 
@@ -432,5 +441,5 @@ WHERE NOT EXISTS (
     AND table_type = 'BASE TABLE'
     AND table_name = expected_table
 );`,
-	}
+	},
 };

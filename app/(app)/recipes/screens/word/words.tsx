@@ -47,7 +47,7 @@ export const WORDS: WordEntry[] = [
 		tip: "Add politeness: ありがとうございます (arigatou gozaimasu).",
 		example: {
 			japanese: "リノが助けてくれて、グレームは「ありがとう！」と言いました。",
-			romaji: "Rino ga tasukete kurete, Gureemu wa \"Arigatou!\" to iimashita.",
+			romaji: 'Rino ga tasukete kurete, Gureemu wa "Arigatou!" to iimashita.',
 			english: "Rino helped, and Graeme said, “Thank you!”",
 		},
 		related: [
@@ -67,10 +67,12 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		tip: "Use it to get attention, apologize, or say “thanks” lightly.",
 		example: {
-			japanese: "グレームは「すみません、もう一回お願いします」と言って、リノはうなずきました。",
+			japanese:
+				"グレームは「すみません、もう一回お願いします」と言って、リノはうなずきました。",
 			romaji:
-				"Gureemu wa \"Sumimasen, mou ikkai onegaishimasu\" to itte, Rino wa unazukimashita.",
-			english: "Graeme said, “Excuse me, one more time please,” and Rino nodded.",
+				'Gureemu wa "Sumimasen, mou ikkai onegaishimasu" to itte, Rino wa unazukimashita.',
+			english:
+				"Graeme said, “Excuse me, one more time please,” and Rino nodded.",
 		},
 		related: [
 			{ japanese: "お願いします", romaji: "onegaishimasu", english: "please" },
@@ -86,9 +88,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		tip: "Polite: おはようございます (ohayou gozaimasu).",
 		example: {
-			japanese: "朝、リノは「おはよう！」と言って、グレームも「おはよう！」と言いました。",
+			japanese:
+				"朝、リノは「おはよう！」と言って、グレームも「おはよう！」と言いました。",
 			romaji:
-				"Asa, Rino wa \"Ohayou!\" to itte, Gureemu mo \"Ohayou!\" to iimashita.",
+				'Asa, Rino wa "Ohayou!" to itte, Gureemu mo "Ohayou!" to iimashita.',
 			english: "In the morning, Rino said “Good morning!” and Graeme did too.",
 		},
 		related: [
@@ -109,9 +112,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		tip: "Casual food compliment: おいしい！ (Oishii!).",
 		example: {
-			japanese: "横浜でラーメンを食べて、グレームとリノは「おいしい！」と言いました。",
+			japanese:
+				"横浜でラーメンを食べて、グレームとリノは「おいしい！」と言いました。",
 			romaji:
-				"Yokohama de raamen o tabete, Gureemu to Rino wa \"Oishii!\" to iimashita.",
+				'Yokohama de raamen o tabete, Gureemu to Rino wa "Oishii!" to iimashita.',
 			english: "Eating ramen in Yokohama, Graeme and Rino said, “Delicious!”",
 		},
 		related: [
@@ -165,7 +169,8 @@ export const WORDS: WordEntry[] = [
 		tip: "Paired words: 今日 / 明日 / 昨日 (today / tomorrow / yesterday).",
 		example: {
 			japanese: "今日は北海道に行く日だと、グレームとリノは言いました。",
-			romaji: "Kyou wa Hokkaidou ni iku hi da to, Gureemu to Rino wa iimashita.",
+			romaji:
+				"Kyou wa Hokkaidou ni iku hi da to, Gureemu to Rino wa iimashita.",
 			english: "Graeme and Rino said today is the day to go to Hokkaido.",
 		},
 		related: [
@@ -183,7 +188,7 @@ export const WORDS: WordEntry[] = [
 		tip: "Useful pair: わかります / わかりません (I understand / I don’t).",
 		example: {
 			japanese: "リノが説明して、グレームは「わかる！」と言いました。",
-			romaji: "Rino ga setsumei shite, Gureemu wa \"Wakaru!\" to iimashita.",
+			romaji: 'Rino ga setsumei shite, Gureemu wa "Wakaru!" to iimashita.',
 			english: "Rino explained it, and Graeme said, “I get it!”",
 		},
 		related: [
@@ -200,8 +205,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		tip: "Common casual reaction: かわいい！ (Kawaii!).",
 		example: {
-			japanese: "リノが見つけた犬を見て、グレームは「かわいい！」と言いました。",
-			romaji: "Rino ga mitsuketa inu o mite, Gureemu wa \"Kawaii!\" to iimashita.",
+			japanese:
+				"リノが見つけた犬を見て、グレームは「かわいい！」と言いました。",
+			romaji:
+				'Rino ga mitsuketa inu o mite, Gureemu wa "Kawaii!" to iimashita.',
 			english: "Seeing the dog Rino found, Graeme said, “Cute!”",
 		},
 		related: [
@@ -244,7 +251,7 @@ export const WORDS: WordEntry[] = [
 		tip: "万能フレーズ: “please” + “nice to meet you” vibes.",
 		example: {
 			japanese: "グレームは「これ、お願いします」と言って、リノは笑いました。",
-			romaji: "Gureemu wa \"Kore, onegaishimasu\" to itte, Rino wa waraimashita.",
+			romaji: 'Gureemu wa "Kore, onegaishimasu" to itte, Rino wa waraimashita.',
 			english: "Graeme said, “This one, please,” and Rino laughed.",
 		},
 	},
@@ -255,9 +262,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "phrase",
 		jlpt: "N5",
 		example: {
-			japanese: "横浜で会って、リノは「こんにちは」、グレームも「こんにちは」と言いました。",
+			japanese:
+				"横浜で会って、リノは「こんにちは」、グレームも「こんにちは」と言いました。",
 			romaji:
-				"Yokohama de atte, Rino wa \"Konnichiwa\", Gureemu mo \"Konnichiwa\" to iimashita.",
+				'Yokohama de atte, Rino wa "Konnichiwa", Gureemu mo "Konnichiwa" to iimashita.',
 			english: "Meeting in Yokohama, Rino said “Hello,” and Graeme did too.",
 		},
 	},
@@ -269,7 +277,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "夜、リノは「こんばんは」と言って、グレームは手をふりました。",
-			romaji: "Yoru, Rino wa \"Konbanwa\" to itte, Gureemu wa te o furimashita.",
+			romaji: 'Yoru, Rino wa "Konbanwa" to itte, Gureemu wa te o furimashita.',
 			english: "At night, Rino said “Good evening,” and Graeme waved.",
 		},
 	},
@@ -281,8 +289,9 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		tip: "Polite: おやすみなさい (oyasuminasai).",
 		example: {
-			japanese: "グレームは「おやすみ」と言って、リノも「おやすみ」と言いました。",
-			romaji: "Gureemu wa \"Oyasumi\" to itte, Rino mo \"Oyasumi\" to iimashita.",
+			japanese:
+				"グレームは「おやすみ」と言って、リノも「おやすみ」と言いました。",
+			romaji: 'Gureemu wa "Oyasumi" to itte, Rino mo "Oyasumi" to iimashita.',
 			english: "Graeme said “Good night,” and Rino said it too.",
 		},
 	},
@@ -293,10 +302,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "phrase",
 		jlpt: "N5",
 		example: {
-			japanese: "駅で別れて、リノは「さようなら」、グレームは「またね」と言いました。",
+			japanese:
+				"駅で別れて、リノは「さようなら」、グレームは「またね」と言いました。",
 			romaji:
-				"Eki de wakarete, Rino wa \"Sayounara\", Gureemu wa \"Matane\" to iimashita.",
-			english: "Parting at the station, Rino said “Goodbye,” and Graeme said “See you.”",
+				'Eki de wakarete, Rino wa "Sayounara", Gureemu wa "Matane" to iimashita.',
+			english:
+				"Parting at the station, Rino said “Goodbye,” and Graeme said “See you.”",
 		},
 	},
 	{
@@ -308,7 +319,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが転んで、リノは「大丈夫？」と聞きました。",
-			romaji: "Gureemu ga koronde, Rino wa \"Daijoubu?\" to kikimashita.",
+			romaji: 'Gureemu ga koronde, Rino wa "Daijoubu?" to kikimashita.',
 			english: "Graeme fell, and Rino asked, “Are you okay?”",
 		},
 	},
@@ -320,7 +331,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「これ、いくらですか」と聞いて、リノは答えました。",
-			romaji: "Gureemu wa \"Kore, ikura desu ka\" to kiite, Rino wa kotaemashita.",
+			romaji:
+				'Gureemu wa "Kore, ikura desu ka" to kiite, Rino wa kotaemashita.',
 			english: "Graeme asked “How much is this?” and Rino answered.",
 		},
 	},
@@ -331,8 +343,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "question",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「トイレはどこですか」と聞いて、リノは指さしました。",
-			romaji: "Gureemu wa \"Toire wa doko desu ka\" to kiite, Rino wa yubisashimashita.",
+			japanese:
+				"グレームは「トイレはどこですか」と聞いて、リノは指さしました。",
+			romaji:
+				'Gureemu wa "Toire wa doko desu ka" to kiite, Rino wa yubisashimashita.',
 			english: "Graeme asked “Where is the bathroom?” and Rino pointed.",
 		},
 	},
@@ -345,7 +359,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノが笑って、グレームは「なに？」と聞きました。",
-			romaji: "Rino ga waratte, Gureemu wa \"Nani?\" to kikimashita.",
+			romaji: 'Rino ga waratte, Gureemu wa "Nani?" to kikimashita.',
 			english: "Rino laughed, and Graeme asked, “What?”",
 		},
 	},
@@ -357,8 +371,9 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "question",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「だれ？」と聞いて、リノは「わたし！」と言いました。",
-			romaji: "Gureemu wa \"Dare?\" to kiite, Rino wa \"Watashi!\" to iimashita.",
+			japanese:
+				"グレームは「だれ？」と聞いて、リノは「わたし！」と言いました。",
+			romaji: 'Gureemu wa "Dare?" to kiite, Rino wa "Watashi!" to iimashita.',
 			english: "Graeme asked “Who?” and Rino said, “Me!”",
 		},
 	},
@@ -369,8 +384,9 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "question",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「いつ行く？」と聞いて、リノは「明日」と言いました。",
-			romaji: "Gureemu wa \"Itsu iku?\" to kiite, Rino wa \"Ashita\" to iimashita.",
+			japanese:
+				"グレームは「いつ行く？」と聞いて、リノは「明日」と言いました。",
+			romaji: 'Gureemu wa "Itsu iku?" to kiite, Rino wa "Ashita" to iimashita.',
 			english: "Graeme asked “When are we going?” and Rino said “Tomorrow.”",
 		},
 	},
@@ -382,7 +398,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノが急いでいて、グレームは「どうして？」と聞きました。",
-			romaji: "Rino ga isoide ite, Gureemu wa \"Doushite?\" to kikimashita.",
+			romaji: 'Rino ga isoide ite, Gureemu wa "Doushite?" to kikimashita.',
 			english: "Rino was rushing, and Graeme asked, “Why?”",
 		},
 	},
@@ -393,9 +409,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "question",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「どうする？」と聞いて、リノは「コーヒーを飲む」と言いました。",
-			romaji: "Gureemu wa \"Dou suru?\" to kiite, Rino wa \"Koohii o nomu\" to iimashita.",
-			english: "Graeme asked “What should we do?” and Rino said “Drink coffee.”",
+			japanese:
+				"グレームは「どうする？」と聞いて、リノは「コーヒーを飲む」と言いました。",
+			romaji:
+				'Gureemu wa "Dou suru?" to kiite, Rino wa "Koohii o nomu" to iimashita.',
+			english:
+				"Graeme asked “What should we do?” and Rino said “Drink coffee.”",
 		},
 	},
 	{
@@ -406,7 +425,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「これがいい」と言って、リノはうなずきました。",
-			romaji: "Gureemu wa \"Kore ga ii\" to itte, Rino wa unazukimashita.",
+			romaji: 'Gureemu wa "Kore ga ii" to itte, Rino wa unazukimashita.',
 			english: "Graeme said “This one is good,” and Rino nodded.",
 		},
 	},
@@ -418,7 +437,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「それはダメ」と言って、グレームは笑いました。",
-			romaji: "Rino wa \"Sore wa dame\" to itte, Gureemu wa waraimashita.",
+			romaji: 'Rino wa "Sore wa dame" to itte, Gureemu wa waraimashita.',
 			english: "Rino said “That one’s no good,” and Graeme laughed.",
 		},
 	},
@@ -429,8 +448,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "pronoun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「あれは何？」と聞いて、リノは「猫だよ」と答えました。",
-			romaji: "Gureemu wa \"Are wa nani?\" to kiite, Rino wa \"Neko da yo\" to kotaemashita.",
+			japanese:
+				"グレームは「あれは何？」と聞いて、リノは「猫だよ」と答えました。",
+			romaji:
+				'Gureemu wa "Are wa nani?" to kiite, Rino wa "Neko da yo" to kotaemashita.',
 			english: "Graeme asked “What’s that over there?” and Rino said “A cat.”",
 		},
 	},
@@ -441,8 +462,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "question",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「どれがいい？」と聞いて、リノは「これ！」と言いました。",
-			romaji: "Gureemu wa \"Dore ga ii?\" to kiite, Rino wa \"Kore!\" to iimashita.",
+			japanese:
+				"グレームは「どれがいい？」と聞いて、リノは「これ！」と言いました。",
+			romaji:
+				'Gureemu wa "Dore ga ii?" to kiite, Rino wa "Kore!" to iimashita.',
 			english: "Graeme asked “Which one’s good?” and Rino said “This!”",
 		},
 	},
@@ -454,7 +477,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「ここに座って」と言って、グレームは座りました。",
-			romaji: "Rino wa \"Koko ni suwatte\" to itte, Gureemu wa suwarimashita.",
+			romaji: 'Rino wa "Koko ni suwatte" to itte, Gureemu wa suwarimashita.',
 			english: "Rino said “Sit here,” and Graeme sat down.",
 		},
 	},
@@ -465,8 +488,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "adverb",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「そこだよね？」と聞いて、リノは「うん」と言いました。",
-			romaji: "Gureemu wa \"Soko da yo ne?\" to kiite, Rino wa \"Un\" to iimashita.",
+			japanese:
+				"グレームは「そこだよね？」と聞いて、リノは「うん」と言いました。",
+			romaji:
+				'Gureemu wa "Soko da yo ne?" to kiite, Rino wa "Un" to iimashita.',
 			english: "Graeme asked “It’s there, right?” and Rino said “Yeah.”",
 		},
 	},
@@ -478,7 +503,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「あそこに駅がある」と言って、グレームは走りました。",
-			romaji: "Rino wa \"Asoko ni eki ga aru\" to itte, Gureemu wa hashirimashita.",
+			romaji:
+				'Rino wa "Asoko ni eki ga aru" to itte, Gureemu wa hashirimashita.',
 			english: "Rino said “The station is over there,” and Graeme ran.",
 		},
 	},
@@ -491,7 +517,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが迷って、リノは「左！」と言いました。",
-			romaji: "Gureemu ga mayotte, Rino wa \"Hidari!\" to iimashita.",
+			romaji: 'Gureemu ga mayotte, Rino wa "Hidari!" to iimashita.',
 			english: "Graeme got lost, and Rino said, “Left!”",
 		},
 	},
@@ -504,7 +530,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「右に曲がって」と言って、グレームは右に曲がりました。",
-			romaji: "Rino wa \"Migi ni magatte\" to itte, Gureemu wa migi ni magarimashita.",
+			romaji:
+				'Rino wa "Migi ni magatte" to itte, Gureemu wa migi ni magarimashita.',
 			english: "Rino said “Turn right,” and Graeme turned right.",
 		},
 	},
@@ -516,7 +543,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「まっすぐ行くね」と言って、リノはうなずきました。",
-			romaji: "Gureemu wa \"Massugu iku ne\" to itte, Rino wa unazukimashita.",
+			romaji: 'Gureemu wa "Massugu iku ne" to itte, Rino wa unazukimashita.',
 			english: "Graeme said “I’ll go straight,” and Rino nodded.",
 		},
 	},
@@ -555,7 +582,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「入口はあそこ」と言って、グレームは走りました。",
-			romaji: "Rino wa \"Iriguchi wa asoko\" to itte, Gureemu wa hashirimashita.",
+			romaji: 'Rino wa "Iriguchi wa asoko" to itte, Gureemu wa hashirimashita.',
 			english: "Rino said “The entrance is over there,” and Graeme ran.",
 		},
 	},
@@ -567,8 +594,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「出口どこ？」と聞いて、リノは「右だよ」と言いました。",
-			romaji: "Gureemu wa \"Deguchi doko?\" to kiite, Rino wa \"Migi da yo\" to iimashita.",
+			japanese:
+				"グレームは「出口どこ？」と聞いて、リノは「右だよ」と言いました。",
+			romaji:
+				'Gureemu wa "Deguchi doko?" to kiite, Rino wa "Migi da yo" to iimashita.',
 			english: "Graeme asked “Where’s the exit?” and Rino said “To the right.”",
 		},
 	},
@@ -594,7 +623,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームとリノは電車に乗って、北海道の話をしました。",
-			romaji: "Gureemu to Rino wa densha ni notte, Hokkaidou no hanashi o shimashita.",
+			romaji:
+				"Gureemu to Rino wa densha ni notte, Hokkaidou no hanashi o shimashita.",
 			english: "Graeme and Rino rode the train and talked about Hokkaido.",
 		},
 	},
@@ -618,7 +648,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「タクシー！」と言って、リノは笑いました。",
-			romaji: "Gureemu wa \"Takushii!\" to itte, Rino wa waraimashita.",
+			romaji: 'Gureemu wa "Takushii!" to itte, Rino wa waraimashita.',
 			english: "Graeme shouted “Taxi!” and Rino laughed.",
 		},
 	},
@@ -630,10 +660,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "スコットランドみたいに風が強くて、グレームとリノは自転車をやめました。",
+			japanese:
+				"スコットランドみたいに風が強くて、グレームとリノは自転車をやめました。",
 			romaji:
 				"Sukottorando mitai ni kaze ga tsuyokute, Gureemu to Rino wa jitensha o yamemashita.",
-			english: "The wind was strong like in Scotland, so Graeme and Rino stopped cycling.",
+			english:
+				"The wind was strong like in Scotland, so Graeme and Rino stopped cycling.",
 		},
 	},
 	{
@@ -670,8 +702,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "地図を見て、リノは「こっち」と言い、グレームはついていきました。",
-			romaji: "Chizu o mite, Rino wa \"Kocchi\" to ii, Gureemu wa tsuite ikimashita.",
+			japanese:
+				"地図を見て、リノは「こっち」と言い、グレームはついていきました。",
+			romaji:
+				'Chizu o mite, Rino wa "Kocchi" to ii, Gureemu wa tsuite ikimashita.',
 			english: "Looking at the map, Rino said “This way,” and Graeme followed.",
 		},
 	},
@@ -683,7 +717,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが「トイレ…」と言って、リノは急ぎました。",
-			romaji: "Gureemu ga \"Toire...\" to itte, Rino wa isogimashita.",
+			romaji: 'Gureemu ga "Toire..." to itte, Rino wa isogimashita.',
 			english: "Graeme said “Bathroom…” and Rino hurried.",
 		},
 	},
@@ -695,7 +729,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "北海道のホテルで、グレームとリノは温泉をさがしました。",
-			romaji: "Hokkaidou no hoteru de, Gureemu to Rino wa onsen o sagashimashita.",
+			romaji:
+				"Hokkaidou no hoteru de, Gureemu to Rino wa onsen o sagashimashita.",
 			english: "At a Hokkaido hotel, Graeme and Rino looked for a hot spring.",
 		},
 	},
@@ -707,10 +742,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "空港で、リノは「パスポートある？」と聞いて、グレームは青ざめました。",
+			japanese:
+				"空港で、リノは「パスポートある？」と聞いて、グレームは青ざめました。",
 			romaji:
-				"Kuukou de, Rino wa \"Pasupooto aru?\" to kiite, Gureemu wa aozamemashita.",
-			english: "At the airport, Rino asked “Do you have your passport?” and Graeme went pale.",
+				'Kuukou de, Rino wa "Pasupooto aru?" to kiite, Gureemu wa aozamemashita.',
+			english:
+				"At the airport, Rino asked “Do you have your passport?” and Graeme went pale.",
 		},
 	},
 	{
@@ -733,7 +770,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノはメニューを指さして、グレームは「それ！」と言いました。",
-			romaji: "Rino wa menyuu o yubisashite, Gureemu wa \"Sore!\" to iimashita.",
+			romaji: 'Rino wa menyuu o yubisashite, Gureemu wa "Sore!" to iimashita.',
 			english: "Rino pointed at the menu, and Graeme said “That one!”",
 		},
 	},
@@ -746,7 +783,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "注文が多すぎて、リノはグレームに「落ち着いて」と言いました。",
-			romaji: "Chuumon ga oosugite, Rino wa Gureemu ni \"Ochitsuite\" to iimashita.",
+			romaji:
+				'Chuumon ga oosugite, Rino wa Gureemu ni "Ochitsuite" to iimashita.',
 			english: "The order was too big, and Rino told Graeme “Calm down.”",
 		},
 	},
@@ -758,9 +796,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「お会計お願いします」と言って、リノはにやっとしました。",
+			japanese:
+				"グレームは「お会計お願いします」と言って、リノはにやっとしました。",
 			romaji:
-				"Gureemu wa \"Okaikei onegaishimasu\" to itte, Rino wa niyatto shimashita.",
+				'Gureemu wa "Okaikei onegaishimasu" to itte, Rino wa niyatto shimashita.',
 			english: "Graeme said “Check, please,” and Rino grinned.",
 		},
 	},
@@ -785,8 +824,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "verb",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは北海道に行くと言って、リノは「いいね！」と言いました。",
-			romaji: "Gureemu wa Hokkaidou ni iku to itte, Rino wa \"Ii ne!\" to iimashita.",
+			japanese:
+				"グレームは北海道に行くと言って、リノは「いいね！」と言いました。",
+			romaji:
+				'Gureemu wa Hokkaidou ni iku to itte, Rino wa "Ii ne!" to iimashita.',
 			english: "Graeme said he’s going to Hokkaido, and Rino said “Nice!”",
 		},
 	},
@@ -799,7 +840,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノが「すぐ来るよ」と言って、グレームは待ちました。",
-			romaji: "Rino ga \"Sugu kuru yo\" to itte, Gureemu wa machimashita.",
+			romaji: 'Rino ga "Sugu kuru yo" to itte, Gureemu wa machimashita.',
 			english: "Rino said “I’ll come right away,” and Graeme waited.",
 		},
 	},
@@ -825,7 +866,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームがドアから出ると、リノが「待って！」と言いました。",
-			romaji: "Gureemu ga doa kara deru to, Rino ga \"Matte!\" to iimashita.",
+			romaji: 'Gureemu ga doa kara deru to, Rino ga "Matte!" to iimashita.',
 			english: "As Graeme left through the door, Rino said “Wait!”",
 		},
 	},
@@ -955,7 +996,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「それは売らない」と言って、グレームはあきらめました。",
-			romaji: "Rino wa \"Sore wa uranai\" to itte, Gureemu wa akiramemashita.",
+			romaji: 'Rino wa "Sore wa uranai" to itte, Gureemu wa akiramemashita.',
 			english: "Rino said “I’m not selling that,” and Graeme gave up.",
 		},
 	},
@@ -968,7 +1009,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは朝ご飯を作って、グレームは「すごい！」と言いました。",
-			romaji: "Rino wa asagohan o tsukutte, Gureemu wa \"Sugoi!\" to iimashita.",
+			romaji: 'Rino wa asagohan o tsukutte, Gureemu wa "Sugoi!" to iimashita.',
 			english: "Rino made breakfast, and Graeme said “Amazing!”",
 		},
 	},
@@ -979,9 +1020,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "verb",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「なにする？」と聞いて、リノは「散歩する」と言いました。",
-			romaji: "Gureemu wa \"Nani suru?\" to kiite, Rino wa \"Sanpo suru\" to iimashita.",
-			english: "Graeme asked “What should we do?” and Rino said “Let’s take a walk.”",
+			japanese:
+				"グレームは「なにする？」と聞いて、リノは「散歩する」と言いました。",
+			romaji:
+				'Gureemu wa "Nani suru?" to kiite, Rino wa "Sanpo suru" to iimashita.',
+			english:
+				"Graeme asked “What should we do?” and Rino said “Let’s take a walk.”",
 		},
 	},
 	{
@@ -993,7 +1037,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームはよく働いて、リノは「休んで」と言いました。",
-			romaji: "Gureemu wa yoku hataraite, Rino wa \"Yasunde\" to iimashita.",
+			romaji: 'Gureemu wa yoku hataraite, Rino wa "Yasunde" to iimashita.',
 			english: "Graeme worked a lot, and Rino said “Rest.”",
 		},
 	},
@@ -1058,7 +1102,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "スコットランドの話をしながら、グレームとリノは歩きました。",
-			romaji: "Sukottorando no hanashi o shinagara, Gureemu to Rino wa arukimashita.",
+			romaji:
+				"Sukottorando no hanashi o shinagara, Gureemu to Rino wa arukimashita.",
 			english: "Talking about Scotland, Graeme and Rino walked.",
 		},
 	},
@@ -1110,7 +1155,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは待って、リノは「あと5分！」と言いました。",
-			romaji: "Gureemu wa matte, Rino wa \"Ato go-fun!\" to iimashita.",
+			romaji: 'Gureemu wa matte, Rino wa "Ato go-fun!" to iimashita.',
 			english: "Graeme waited, and Rino said “Five more minutes!”",
 		},
 	},
@@ -1123,7 +1168,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノが「急いで！」と言って、グレームは急ぎました。",
-			romaji: "Rino ga \"Isoide!\" to itte, Gureemu wa isogimashita.",
+			romaji: 'Rino ga "Isoide!" to itte, Gureemu wa isogimashita.',
 			english: "Rino said “Hurry!” and Graeme hurried.",
 		},
 	},
@@ -1162,7 +1207,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「それはいい」と思って、リノもそう思いました。",
-			romaji: "Gureemu wa \"Sore wa ii\" to omotte, Rino mo sou omoimashita.",
+			romaji: 'Gureemu wa "Sore wa ii" to omotte, Rino mo sou omoimashita.',
 			english: "Graeme thought “That’s good,” and Rino thought so too.",
 		},
 	},
@@ -1188,7 +1233,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは単語を覚えて、リノは「天才？」と言いました。",
-			romaji: "Gureemu wa tango o oboete, Rino wa \"Tensai?\" to iimashita.",
+			romaji: 'Gureemu wa tango o oboete, Rino wa "Tensai?" to iimashita.',
 			english: "Graeme memorized the words, and Rino said “Genius?”",
 		},
 	},
@@ -1201,7 +1246,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが切符を忘れて、リノは「うそでしょ」と言いました。",
-			romaji: "Gureemu ga kippu o wasurete, Rino wa \"Uso desho\" to iimashita.",
+			romaji: 'Gureemu ga kippu o wasurete, Rino wa "Uso desho" to iimashita.',
 			english: "Graeme forgot the ticket, and Rino said “No way.”",
 		},
 	},
@@ -1227,7 +1272,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームはリノから料理を習って、リノは誇らしげでした。",
-			romaji: "Gureemu wa Rino kara ryouri o naratte, Rino wa hokorashige deshita.",
+			romaji:
+				"Gureemu wa Rino kara ryouri o naratte, Rino wa hokorashige deshita.",
 			english: "Graeme learned cooking from Rino, and Rino looked proud.",
 		},
 	},
@@ -1240,7 +1286,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが手伝うと言って、リノは「ありがとう」と言いました。",
-			romaji: "Gureemu ga tetsudau to itte, Rino wa \"Arigatou\" to iimashita.",
+			romaji: 'Gureemu ga tetsudau to itte, Rino wa "Arigatou" to iimashita.',
 			english: "Graeme said he’d help, and Rino said “Thanks.”",
 		},
 	},
@@ -1266,7 +1312,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは傘を貸して、リノは「神！」と言いました。",
-			romaji: "Gureemu wa kasa o kashite, Rino wa \"Kami!\" to iimashita.",
+			romaji: 'Gureemu wa kasa o kashite, Rino wa "Kami!" to iimashita.',
 			english: "Graeme lent an umbrella, and Rino said “You’re a legend!”",
 		},
 	},
@@ -1292,7 +1338,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームがドアを開けて、リノは「寒い！」と言いました。",
-			romaji: "Gureemu ga doa o akete, Rino wa \"Samui!\" to iimashita.",
+			romaji: 'Gureemu ga doa o akete, Rino wa "Samui!" to iimashita.',
 			english: "Graeme opened the door, and Rino said “It’s cold!”",
 		},
 	},
@@ -1305,7 +1351,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「ドア閉めて」と言って、グレームは閉めました。",
-			romaji: "Rino wa \"Doa shimete\" to itte, Gureemu wa shimemashita.",
+			romaji: 'Rino wa "Doa shimete" to itte, Gureemu wa shimemashita.',
 			english: "Rino said “Close the door,” and Graeme closed it.",
 		},
 	},
@@ -1318,7 +1364,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "暗くて、グレームは電気をつけて、リノはほっとしました。",
-			romaji: "Kura kute, Gureemu wa denki o tsukete, Rino wa hotto shimashita.",
+			romaji:
+				"Kura kute, Gureemu wa denki o tsukete, Rino wa hotto shimashita.",
 			english: "It was dark, so Graeme turned on the light and Rino relaxed.",
 		},
 	},
@@ -1330,9 +1377,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "verb",
 		jlpt: "N5",
 		example: {
-			japanese: "寝る前に、リノは電気を消して、グレームは「えらい」と言いました。",
-			romaji: "Neru mae ni, Rino wa denki o keshite, Gureemu wa \"Erai\" to iimashita.",
-			english: "Before sleeping, Rino turned off the light and Graeme said “Good job.”",
+			japanese:
+				"寝る前に、リノは電気を消して、グレームは「えらい」と言いました。",
+			romaji:
+				'Neru mae ni, Rino wa denki o keshite, Gureemu wa "Erai" to iimashita.',
+			english:
+				"Before sleeping, Rino turned off the light and Graeme said “Good job.”",
 		},
 	},
 	{
@@ -1357,7 +1407,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "横浜で、リノは写真を撮って、グレームはポーズしました。",
-			romaji: "Yokohama de, Rino wa shashin o totte, Gureemu wa poozu shimashita.",
+			romaji:
+				"Yokohama de, Rino wa shashin o totte, Gureemu wa poozu shimashita.",
 			english: "In Yokohama, Rino took a photo and Graeme posed.",
 		},
 	},
@@ -1369,8 +1420,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "リノは「時間ある？」と聞いて、グレームは「少しある」と言いました。",
-			romaji: "Rino wa \"Jikan aru?\" to kiite, Gureemu wa \"Sukoshi aru\" to iimashita.",
+			japanese:
+				"リノは「時間ある？」と聞いて、グレームは「少しある」と言いました。",
+			romaji:
+				'Rino wa "Jikan aru?" to kiite, Gureemu wa "Sukoshi aru" to iimashita.',
 			english: "Rino asked “Do you have time?” and Graeme said “A little.”",
 		},
 	},
@@ -1382,8 +1435,9 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは「今行く！」と言って、リノは「やっと！」と言いました。",
-			romaji: "Gureemu wa \"Ima iku!\" to itte, Rino wa \"Yatto!\" to iimashita.",
+			japanese:
+				"グレームは「今行く！」と言って、リノは「やっと！」と言いました。",
+			romaji: 'Gureemu wa "Ima iku!" to itte, Rino wa "Yatto!" to iimashita.',
 			english: "Graeme said “I’m going now!” and Rino said “Finally!”",
 		},
 	},
@@ -1396,7 +1450,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "明日、グレームとリノはスコットランドの話を続けます。",
-			romaji: "Ashita, Gureemu to Rino wa Sukottorando no hanashi o tsudzukemasu.",
+			romaji:
+				"Ashita, Gureemu to Rino wa Sukottorando no hanashi o tsudzukemasu.",
 			english: "Tomorrow, Graeme and Rino will continue the Scotland talk.",
 		},
 	},
@@ -1409,7 +1464,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "昨日、リノは北海道の写真を見せて、グレームは驚きました。",
-			romaji: "Kinou, Rino wa Hokkaidou no shashin o misete, Gureemu wa odorokimashita.",
+			romaji:
+				"Kinou, Rino wa Hokkaidou no shashin o misete, Gureemu wa odorokimashita.",
 			english: "Yesterday, Rino showed Hokkaido photos and Graeme was amazed.",
 		},
 	},
@@ -1513,7 +1569,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「あと5分」と言って、グレームは深呼吸しました。",
-			romaji: "Rino wa \"Ato go-fun\" to itte, Gureemu wa shinkokyuu shimashita.",
+			romaji: 'Rino wa "Ato go-fun" to itte, Gureemu wa shinkokyuu shimashita.',
 			english: "Rino said “Five more minutes,” and Graeme took a deep breath.",
 		},
 	},
@@ -1526,7 +1582,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは「今、3時だよ」と言って、リノは驚きました。",
-			romaji: "Gureemu wa \"Ima, san-ji da yo\" to itte, Rino wa odorokimashita.",
+			romaji: 'Gureemu wa "Ima, san-ji da yo" to itte, Rino wa odorokimashita.',
 			english: "Graeme said “It’s 3 o’clock now,” and Rino was surprised.",
 		},
 	},
@@ -1565,7 +1621,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "休みに、グレームとリノは北海道の計画を立てました。",
-			romaji: "Yasumi ni, Gureemu to Rino wa Hokkaidou no keikaku o tatemashita.",
+			romaji:
+				"Yasumi ni, Gureemu to Rino wa Hokkaidou no keikaku o tatemashita.",
 			english: "On their break, Graeme and Rino made a Hokkaido plan.",
 		},
 	},
@@ -1591,7 +1648,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "学校で、リノは勉強して、グレームは質問しました。",
-			romaji: "Gakkou de, Rino wa benkyou shite, Gureemu wa shitsumon shimashita.",
+			romaji:
+				"Gakkou de, Rino wa benkyou shite, Gureemu wa shitsumon shimashita.",
 			english: "At school, Rino studied and Graeme asked questions.",
 		},
 	},
@@ -1604,7 +1662,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "会社で、グレームは忙しくて、リノはコーヒーをくれました。",
-			romaji: "Kaisha de, Gureemu wa isogashikute, Rino wa koohii o kuremashita.",
+			romaji:
+				"Kaisha de, Gureemu wa isogashikute, Rino wa koohii o kuremashita.",
 			english: "At the company, Graeme was busy, and Rino gave him coffee.",
 		},
 	},
@@ -1630,7 +1689,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "部屋がきれいで、グレームは感動して、リノは自慢しました。",
-			romaji: "Heya ga kirei de, Gureemu wa kandou shite, Rino wa jiman shimashita.",
+			romaji:
+				"Heya ga kirei de, Gureemu wa kandou shite, Rino wa jiman shimashita.",
 			english: "The room was clean; Graeme was impressed and Rino bragged.",
 		},
 	},
@@ -1643,7 +1703,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "台所で、リノは料理して、グレームは味見しました。",
-			romaji: "Daidokoro de, Rino wa ryouri shite, Gureemu wa ajimi shimashita.",
+			romaji:
+				"Daidokoro de, Rino wa ryouri shite, Gureemu wa ajimi shimashita.",
 			english: "In the kitchen, Rino cooked and Graeme taste-tested.",
 		},
 	},
@@ -1656,7 +1717,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "北海道で、グレームとリノはお風呂に入って温まりました。",
-			romaji: "Hokkaidou de, Gureemu to Rino wa ofuro ni haitte atatamarimashita.",
+			romaji:
+				"Hokkaidou de, Gureemu to Rino wa ofuro ni haitte atatamarimashita.",
 			english: "In Hokkaido, Graeme and Rino took a bath and warmed up.",
 		},
 	},
@@ -1692,8 +1754,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "テーブルにコーヒーがあって、グレームとリノはにっこりしました。",
-			romaji: "Teeburu ni koohii ga atte, Gureemu to Rino wa nikkori shimashita.",
+			japanese:
+				"テーブルにコーヒーがあって、グレームとリノはにっこりしました。",
+			romaji:
+				"Teeburu ni koohii ga atte, Gureemu to Rino wa nikkori shimashita.",
 			english: "There was coffee on the table, and Graeme and Rino smiled.",
 		},
 	},
@@ -1706,7 +1770,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは椅子を引いて、グレームは「ありがとう」と言いました。",
-			romaji: "Rino wa isu o hiite, Gureemu wa \"Arigatou\" to iimashita.",
+			romaji: 'Rino wa isu o hiite, Gureemu wa "Arigatou" to iimashita.',
 			english: "Rino pulled out a chair, and Graeme said “Thanks.”",
 		},
 	},
@@ -1718,7 +1782,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームはかばんを忘れて、リノは「また？」と言いました。",
-			romaji: "Gureemu wa kaban o wasurete, Rino wa \"Mata?\" to iimashita.",
+			romaji: 'Gureemu wa kaban o wasurete, Rino wa "Mata?" to iimashita.',
 			english: "Graeme forgot his bag, and Rino said “Again?”",
 		},
 	},
@@ -1743,7 +1807,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームのスマホが鳴って、リノは「人気者だね」と言いました。",
-			romaji: "Gureemu no sumaho ga natte, Rino wa \"Ninkimono da ne\" to iimashita.",
+			romaji:
+				'Gureemu no sumaho ga natte, Rino wa "Ninkimono da ne" to iimashita.',
 			english: "Graeme’s phone rang, and Rino said “You’re popular.”",
 		},
 	},
@@ -1768,8 +1833,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "雨で、リノは傘をさして、グレームは「ありがとう」と言いました。",
-			romaji: "Ame de, Rino wa kasa o sashite, Gureemu wa \"Arigatou\" to iimashita.",
+			japanese:
+				"雨で、リノは傘をさして、グレームは「ありがとう」と言いました。",
+			romaji:
+				'Ame de, Rino wa kasa o sashite, Gureemu wa "Arigatou" to iimashita.',
 			english: "In the rain, Rino held an umbrella and Graeme said “Thanks.”",
 		},
 	},
@@ -1782,8 +1849,9 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは靴をはいて、リノは「早いね」と言いました。",
-			romaji: "Gureemu wa kutsu o haite, Rino wa \"Hayai ne\" to iimashita.",
-			english: "Graeme put on his shoes quickly, and Rino said “That was fast.”",
+			romaji: 'Gureemu wa kutsu o haite, Rino wa "Hayai ne" to iimashita.',
+			english:
+				"Graeme put on his shoes quickly, and Rino said “That was fast.”",
 		},
 	},
 	{
@@ -1794,10 +1862,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "北海道は寒いので、リノは服を多めに持ってきて、グレームは感謝しました。",
+			japanese:
+				"北海道は寒いので、リノは服を多めに持ってきて、グレームは感謝しました。",
 			romaji:
 				"Hokkaidou wa samui no de, Rino wa fuku o oome ni motte kite, Gureemu wa kansha shimashita.",
-			english: "Since Hokkaido is cold, Rino brought extra clothes and Graeme was grateful.",
+			english:
+				"Since Hokkaido is cold, Rino brought extra clothes and Graeme was grateful.",
 		},
 	},
 	{
@@ -1809,7 +1879,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは帽子をかぶって、グレームは「似合う！」と言いました。",
-			romaji: "Rino wa boushi o kabutte, Gureemu wa \"Niau!\" to iimashita.",
+			romaji: 'Rino wa boushi o kabutte, Gureemu wa "Niau!" to iimashita.',
 			english: "Rino put on a hat, and Graeme said “It suits you!”",
 		},
 	},
@@ -1822,8 +1892,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは眼鏡をかけて、リノは「先生みたい」と言いました。",
-			romaji: "Gureemu wa megane o kakete, Rino wa \"Sensei mitai\" to iimashita.",
-			english: "Graeme put on glasses, and Rino said “You look like a teacher.”",
+			romaji:
+				'Gureemu wa megane o kakete, Rino wa "Sensei mitai" to iimashita.',
+			english:
+				"Graeme put on glasses, and Rino said “You look like a teacher.”",
 		},
 	},
 	{
@@ -1834,8 +1906,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "リノは食べ物を選んで、グレームは「なんでもいい」と言いました。",
-			romaji: "Rino wa tabemono o erande, Gureemu wa \"Nandemo ii\" to iimashita.",
+			japanese:
+				"リノは食べ物を選んで、グレームは「なんでもいい」と言いました。",
+			romaji:
+				'Rino wa tabemono o erande, Gureemu wa "Nandemo ii" to iimashita.',
 			english: "Rino chose the food, and Graeme said “Anything is fine.”",
 		},
 	},
@@ -1861,7 +1935,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「ご飯できたよ」と言って、グレームは走りました。",
-			romaji: "Rino wa \"Gohan dekita yo\" to itte, Gureemu wa hashirimashita.",
+			romaji: 'Rino wa "Gohan dekita yo" to itte, Gureemu wa hashirimashita.',
 			english: "Rino said “Food’s ready,” and Graeme ran over.",
 		},
 	},
@@ -1873,7 +1947,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームはパンが好きで、リノは「フランス人？」と言いました。",
-			romaji: "Gureemu wa pan ga suki de, Rino wa \"Furansujin?\" to iimashita.",
+			romaji: 'Gureemu wa pan ga suki de, Rino wa "Furansujin?" to iimashita.',
 			english: "Graeme likes bread, and Rino joked “Are you French?”",
 		},
 	},
@@ -1885,7 +1959,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "横浜でラーメンを食べて、グレームとリノは幸せでした。",
-			romaji: "Yokohama de raamen o tabete, Gureemu to Rino wa shiawase deshita.",
+			romaji:
+				"Yokohama de raamen o tabete, Gureemu to Rino wa shiawase deshita.",
 			english: "They ate ramen in Yokohama, and Graeme and Rino were happy.",
 		},
 	},
@@ -1896,9 +1971,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームはコーヒーを飲んで、リノは「元気になった？」と聞きました。",
+			japanese:
+				"グレームはコーヒーを飲んで、リノは「元気になった？」と聞きました。",
 			romaji:
-				"Gureemu wa koohii o nonde, Rino wa \"Genki ni natta?\" to kikimashita.",
+				'Gureemu wa koohii o nonde, Rino wa "Genki ni natta?" to kikimashita.',
 			english: "Graeme drank coffee, and Rino asked “Feeling alive now?”",
 		},
 	},
@@ -1911,7 +1987,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノはお茶を入れて、グレームは「落ち着く」と言いました。",
-			romaji: "Rino wa ocha o irete, Gureemu wa \"Ochitsuku\" to iimashita.",
+			romaji: 'Rino wa ocha o irete, Gureemu wa "Ochitsuku" to iimashita.',
 			english: "Rino made tea, and Graeme said “That’s calming.”",
 		},
 	},
@@ -1922,9 +1998,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームはビールを飲みたくて、リノは「今日はだめ」と言いました。",
+			japanese:
+				"グレームはビールを飲みたくて、リノは「今日はだめ」と言いました。",
 			romaji:
-				"Gureemu wa biiru o nomitakute, Rino wa \"Kyou wa dame\" to iimashita.",
+				'Gureemu wa biiru o nomitakute, Rino wa "Kyou wa dame" to iimashita.',
 			english: "Graeme wanted beer, but Rino said “Not today.”",
 		},
 	},
@@ -1948,8 +2025,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "りんごを食べて、グレームは「甘い！」と言い、リノはにっこりしました。",
-			romaji: "Ringo o tabete, Gureemu wa \"Amai!\" to ii, Rino wa nikkori shimashita.",
+			japanese:
+				"りんごを食べて、グレームは「甘い！」と言い、リノはにっこりしました。",
+			romaji:
+				'Ringo o tabete, Gureemu wa "Amai!" to ii, Rino wa nikkori shimashita.',
 			english: "Eating an apple, Graeme said “Sweet!” and Rino smiled.",
 		},
 	},
@@ -1961,7 +2040,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノはバナナを持ってきて、グレームは「助かる」と言いました。",
-			romaji: "Rino wa banana o motte kite, Gureemu wa \"Tasukaru\" to iimashita.",
+			romaji:
+				'Rino wa banana o motte kite, Gureemu wa "Tasukaru" to iimashita.',
 			english: "Rino brought a banana, and Graeme said “That helps.”",
 		},
 	},
@@ -1973,7 +2053,8 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "北海道の魚はおいしいと、リノは言い、グレームはうなずきました。",
+			japanese:
+				"北海道の魚はおいしいと、リノは言い、グレームはうなずきました。",
 			romaji:
 				"Hokkaidou no sakana wa oishii to, Rino wa ii, Gureemu wa unazukimashita.",
 			english: "Rino said Hokkaido fish is delicious, and Graeme agreed.",
@@ -1988,7 +2069,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは肉が好きで、リノは「野菜もね」と言いました。",
-			romaji: "Gureemu wa niku ga suki de, Rino wa \"Yasai mo ne\" to iimashita.",
+			romaji: 'Gureemu wa niku ga suki de, Rino wa "Yasai mo ne" to iimashita.',
 			english: "Graeme likes meat, and Rino said “Vegetables too, okay?”",
 		},
 	},
@@ -2001,7 +2082,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは野菜を切って、グレームは「プロだ」と言いました。",
-			romaji: "Rino wa yasai o kitte, Gureemu wa \"Puro da\" to iimashita.",
+			romaji: 'Rino wa yasai o kitte, Gureemu wa "Puro da" to iimashita.',
 			english: "Rino chopped vegetables, and Graeme said “You’re a pro.”",
 		},
 	},
@@ -2014,7 +2095,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームは卵を割って、リノは「上手！」と言いました。",
-			romaji: "Gureemu wa tamago o watte, Rino wa \"Jouzu!\" to iimashita.",
+			romaji: 'Gureemu wa tamago o watte, Rino wa "Jouzu!" to iimashita.',
 			english: "Graeme cracked an egg, and Rino said “Nice!”",
 		},
 	},
@@ -2027,7 +2108,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは牛乳を入れて、グレームは「まろやか」と言いました。",
-			romaji: "Rino wa gyuunyuu o irete, Gureemu wa \"Maroyaka\" to iimashita.",
+			romaji: 'Rino wa gyuunyuu o irete, Gureemu wa "Maroyaka" to iimashita.',
 			english: "Rino added milk, and Graeme said “So smooth.”",
 		},
 	},
@@ -2040,7 +2121,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが砂糖を入れすぎて、リノは「甘い！」と言いました。",
-			romaji: "Gureemu ga satou o iresugite, Rino wa \"Amai!\" to iimashita.",
+			romaji: 'Gureemu ga satou o iresugite, Rino wa "Amai!" to iimashita.',
 			english: "Graeme added too much sugar, and Rino said “Sweet!”",
 		},
 	},
@@ -2052,8 +2133,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "リノは塩を少し入れて、グレームは「ちょうどいい」と言いました。",
-			romaji: "Rino wa shio o sukoshi irete, Gureemu wa \"Choudo ii\" to iimashita.",
+			japanese:
+				"リノは塩を少し入れて、グレームは「ちょうどいい」と言いました。",
+			romaji:
+				'Rino wa shio o sukoshi irete, Gureemu wa "Choudo ii" to iimashita.',
 			english: "Rino added a little salt, and Graeme said “Perfect.”",
 		},
 	},
@@ -2066,7 +2149,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "このカレーは辛いので、グレームとリノは水を飲みました。",
-			romaji: "Kono karee wa karai no de, Gureemu to Rino wa mizu o nomimashita.",
+			romaji:
+				"Kono karee wa karai no de, Gureemu to Rino wa mizu o nomimashita.",
 			english: "This curry is spicy, so Graeme and Rino drank water.",
 		},
 	},
@@ -2079,7 +2163,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "ケーキが甘くて、リノは幸せで、グレームはニヤニヤしました。",
-			romaji: "Keeki ga amakute, Rino wa shiawase de, Gureemu wa niyaniya shimashita.",
+			romaji:
+				"Keeki ga amakute, Rino wa shiawase de, Gureemu wa niyaniya shimashita.",
 			english: "The cake was sweet; Rino was happy and Graeme grinned.",
 		},
 	},
@@ -2092,7 +2177,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "すっぱいレモンを食べて、グレームとリノは変な顔をしました。",
-			romaji: "Suppai remon o tabete, Gureemu to Rino wa hen na kao o shimashita.",
+			romaji:
+				"Suppai remon o tabete, Gureemu to Rino wa hen na kao o shimashita.",
 			english: "They ate a sour lemon, and Graeme and Rino made funny faces.",
 		},
 	},
@@ -2104,8 +2190,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "スープが熱くて、リノは「ふーふーして」とグレームに言いました。",
-			romaji: "Suupu ga atsukute, Rino wa \"Fuu-fuu shite\" to Gureemu ni iimashita.",
+			japanese:
+				"スープが熱くて、リノは「ふーふーして」とグレームに言いました。",
+			romaji:
+				'Suupu ga atsukute, Rino wa "Fuu-fuu shite" to Gureemu ni iimashita.',
 			english: "The soup was hot, and Rino told Graeme “Blow on it.”",
 		},
 	},
@@ -2118,8 +2206,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "水が冷たくて、グレームは「最高！」と言い、リノは笑いました。",
-			romaji: "Mizu ga tsumetakute, Gureemu wa \"Saikou!\" to ii, Rino wa waraimashita.",
-			english: "The water was cold, and Graeme said “Perfect!” while Rino laughed.",
+			romaji:
+				'Mizu ga tsumetakute, Gureemu wa "Saikou!" to ii, Rino wa waraimashita.',
+			english:
+				"The water was cold, and Graeme said “Perfect!” while Rino laughed.",
 		},
 	},
 	{
@@ -2131,7 +2221,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「いいね」と言って、グレームはガッツポーズしました。",
-			romaji: "Rino wa \"Ii ne\" to itte, Gureemu wa gattsu poozu shimashita.",
+			romaji: 'Rino wa "Ii ne" to itte, Gureemu wa gattsu poozu shimashita.',
 			english: "Rino said “Nice,” and Graeme fist-pumped.",
 		},
 	},
@@ -2156,9 +2246,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは大きいコーヒーを選んで、リノは「眠れないよ」と言いました。",
+			japanese:
+				"グレームは大きいコーヒーを選んで、リノは「眠れないよ」と言いました。",
 			romaji:
-				"Gureemu wa ookii koohii o erande, Rino wa \"Nemurenai yo\" to iimashita.",
+				'Gureemu wa ookii koohii o erande, Rino wa "Nemurenai yo" to iimashita.',
 			english: "Graeme chose a big coffee, and Rino said “You won’t sleep.”",
 		},
 	},
@@ -2171,7 +2262,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノのかばんは小さくて、グレームは「魔法？」と言いました。",
-			romaji: "Rino no kaban wa chiisakute, Gureemu wa \"Mahou?\" to iimashita.",
+			romaji: 'Rino no kaban wa chiisakute, Gureemu wa "Mahou?" to iimashita.',
 			english: "Rino’s bag is small, and Graeme said “Magic?”",
 		},
 	},
@@ -2183,8 +2274,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームは新しい靴を買って、リノは「かっこいい」と言いました。",
-			romaji: "Gureemu wa atarashii kutsu o katte, Rino wa \"Kakkoii\" to iimashita.",
+			japanese:
+				"グレームは新しい靴を買って、リノは「かっこいい」と言いました。",
+			romaji:
+				'Gureemu wa atarashii kutsu o katte, Rino wa "Kakkoii" to iimashita.',
 			english: "Graeme bought new shoes, and Rino said “Cool.”",
 		},
 	},
@@ -2196,10 +2289,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "古い本を見て、リノは「いい味だね」と言い、グレームはうなずきました。",
+			japanese:
+				"古い本を見て、リノは「いい味だね」と言い、グレームはうなずきました。",
 			romaji:
-				"Furui hon o mite, Rino wa \"Ii aji da ne\" to ii, Gureemu wa unazukimashita.",
-			english: "Seeing an old book, Rino said “It has character,” and Graeme agreed.",
+				'Furui hon o mite, Rino wa "Ii aji da ne" to ii, Gureemu wa unazukimashita.',
+			english:
+				"Seeing an old book, Rino said “It has character,” and Graeme agreed.",
 		},
 	},
 	{
@@ -2211,7 +2306,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "この映画は面白いと、グレームが言って、リノも笑いました。",
-			romaji: "Kono eiga wa omoshiroi to, Gureemu ga itte, Rino mo waraimashita.",
+			romaji:
+				"Kono eiga wa omoshiroi to, Gureemu ga itte, Rino mo waraimashita.",
 			english: "Graeme said this movie is interesting, and Rino laughed too.",
 		},
 	},
@@ -2222,9 +2318,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N4",
 		example: {
-			japanese: "グレームが「つまらない…」と言って、リノは「じゃあ散歩！」と言いました。",
+			japanese:
+				"グレームが「つまらない…」と言って、リノは「じゃあ散歩！」と言いました。",
 			romaji:
-				"Gureemu ga \"Tsumaranai...\" to itte, Rino wa \"Jaa sanpo!\" to iimashita.",
+				'Gureemu ga "Tsumaranai..." to itte, Rino wa "Jaa sanpo!" to iimashita.',
 			english: "Graeme said “I’m bored…,” and Rino said “Then let’s walk!”",
 		},
 	},
@@ -2237,7 +2334,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "旅行は楽しいと、リノが言って、グレームも同意しました。",
-			romaji: "Ryokou wa tanoshii to, Rino ga itte, Gureemu mo doui shimashita.",
+			romaji:
+				"Ryokou wa tanoshii to, Rino ga itte, Gureemu mo doui shimashita.",
 			english: "Rino said traveling is fun, and Graeme agreed.",
 		},
 	},
@@ -2250,7 +2348,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは忙しくて、グレームは「手伝う？」と聞きました。",
-			romaji: "Rino wa isogashikute, Gureemu wa \"Tetsudau?\" to kikimashita.",
+			romaji: 'Rino wa isogashikute, Gureemu wa "Tetsudau?" to kikimashita.',
 			english: "Rino was busy, and Graeme asked “Want help?”",
 		},
 	},
@@ -2262,8 +2360,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "na-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームが「暇だ…」と言って、リノは「勉強しよう」と言いました。",
-			romaji: "Gureemu ga \"Hima da...\" to itte, Rino wa \"Benkyou shiyou\" to iimashita.",
+			japanese:
+				"グレームが「暇だ…」と言って、リノは「勉強しよう」と言いました。",
+			romaji:
+				'Gureemu ga "Hima da..." to itte, Rino wa "Benkyou shiyou" to iimashita.',
 			english: "Graeme said “I’m free…,” and Rino said “Let’s study.”",
 		},
 	},
@@ -2276,7 +2376,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「簡単だよ」と言って、グレームは安心しました。",
-			romaji: "Rino wa \"Kantan da yo\" to itte, Gureemu wa anshin shimashita.",
+			romaji: 'Rino wa "Kantan da yo" to itte, Gureemu wa anshin shimashita.',
 			english: "Rino said “It’s easy,” and Graeme felt relieved.",
 		},
 	},
@@ -2288,9 +2388,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "漢字は難しいと、グレームが言って、リノは「少しずつ」と言いました。",
-			romaji: "Kanji wa muzukashii to, Gureemu ga itte, Rino wa \"Sukoshi zutsu\" to iimashita.",
-			english: "Graeme said kanji is difficult, and Rino said “Little by little.”",
+			japanese:
+				"漢字は難しいと、グレームが言って、リノは「少しずつ」と言いました。",
+			romaji:
+				'Kanji wa muzukashii to, Gureemu ga itte, Rino wa "Sukoshi zutsu" to iimashita.',
+			english:
+				"Graeme said kanji is difficult, and Rino said “Little by little.”",
 		},
 	},
 	{
@@ -2301,10 +2404,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "このホテルは高いと、リノが言って、グレームは「スコットランドより？」と聞きました。",
+			japanese:
+				"このホテルは高いと、リノが言って、グレームは「スコットランドより？」と聞きました。",
 			romaji:
-				"Kono hoteru wa takai to, Rino ga itte, Gureemu wa \"Sukottorando yori?\" to kikimashita.",
-			english: "Rino said this hotel is expensive, and Graeme asked “More than Scotland?”",
+				'Kono hoteru wa takai to, Rino ga itte, Gureemu wa "Sukottorando yori?" to kikimashita.',
+			english:
+				"Rino said this hotel is expensive, and Graeme asked “More than Scotland?”",
 		},
 	},
 	{
@@ -2316,7 +2421,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "この店は安いので、グレームとリノはたくさん買いました。",
-			romaji: "Kono mise wa yasui no de, Gureemu to Rino wa takusan kaimashita.",
+			romaji:
+				"Kono mise wa yasui no de, Gureemu to Rino wa takusan kaimashita.",
 			english: "This shop is cheap, so Graeme and Rino bought a lot.",
 		},
 	},
@@ -2329,7 +2435,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「早いね」と言って、グレームは得意げでした。",
-			romaji: "Rino wa \"Hayai ne\" to itte, Gureemu wa tokuige deshita.",
+			romaji: 'Rino wa "Hayai ne" to itte, Gureemu wa tokuige deshita.',
 			english: "Rino said “That was fast,” and Graeme looked proud.",
 		},
 	},
@@ -2342,7 +2448,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "グレームが遅くて、リノは「置いてくよ！」と言いました。",
-			romaji: "Gureemu ga osokute, Rino wa \"Oiteku yo!\" to iimashita.",
+			romaji: 'Gureemu ga osokute, Rino wa "Oiteku yo!" to iimashita.',
 			english: "Graeme was late, and Rino said “I’m leaving you behind!”",
 		},
 	},
@@ -2368,7 +2474,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "北海道は寒いので、リノは「上着！」とグレームに言いました。",
-			romaji: "Hokkaidou wa samui no de, Rino wa \"Uwagi!\" to Gureemu ni iimashita.",
+			romaji:
+				'Hokkaidou wa samui no de, Rino wa "Uwagi!" to Gureemu ni iimashita.',
 			english: "Because Hokkaido is cold, Rino told Graeme “Jacket!”",
 		},
 	},
@@ -2407,8 +2514,10 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "横浜の夜景はきれいで、グレームとリノは写真を撮りました。",
-			romaji: "Yokohama no yakei wa kirei de, Gureemu to Rino wa shashin o torimashita.",
-			english: "Yokohama’s night view was beautiful, so Graeme and Rino took photos.",
+			romaji:
+				"Yokohama no yakei wa kirei de, Gureemu to Rino wa shashin o torimashita.",
+			english:
+				"Yokohama’s night view was beautiful, so Graeme and Rino took photos.",
 		},
 	},
 	{
@@ -2419,9 +2528,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "na-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "この部屋は静かで、リノは「最高」と言い、グレームはうなずきました。",
+			japanese:
+				"この部屋は静かで、リノは「最高」と言い、グレームはうなずきました。",
 			romaji:
-				"Kono heya wa shizuka de, Rino wa \"Saikou\" to ii, Gureemu wa unazukimashita.",
+				'Kono heya wa shizuka de, Rino wa "Saikou" to ii, Gureemu wa unazukimashita.',
 			english: "This room is quiet; Rino said “Perfect,” and Graeme agreed.",
 		},
 	},
@@ -2446,7 +2556,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "リノは「こわい」と言って、グレームのうしろに隠れました。",
-			romaji: "Rino wa \"Kowai\" to itte, Gureemu no ushiro ni kakuremashita.",
+			romaji: 'Rino wa "Kowai" to itte, Gureemu no ushiro ni kakuremashita.',
 			english: "Rino said “I’m scared” and hid behind Graeme.",
 		},
 	},
@@ -2458,8 +2568,10 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "i-adjective",
 		jlpt: "N5",
 		example: {
-			japanese: "プレゼントをもらって、リノはうれしくて、グレームもにこにこしました。",
-			romaji: "Purezento o moratte, Rino wa ureshikute, Gureemu mo niko-niko shimashita.",
+			japanese:
+				"プレゼントをもらって、リノはうれしくて、グレームもにこにこしました。",
+			romaji:
+				"Purezento o moratte, Rino wa ureshikute, Gureemu mo niko-niko shimashita.",
 			english: "Rino got a present and was happy; Graeme smiled too.",
 		},
 	},
@@ -2472,7 +2584,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "映画が悲しくて、グレームとリノはティッシュを探しました。",
-			romaji: "Eiga ga kanashikute, Gureemu to Rino wa tisshu o sagashimashita.",
+			romaji:
+				"Eiga ga kanashikute, Gureemu to Rino wa tisshu o sagashimashita.",
 			english: "The movie was sad, and Graeme and Rino looked for tissues.",
 		},
 	},
@@ -2484,9 +2597,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "na-adjective",
 		jlpt: "N4",
 		example: {
-			japanese: "このアプリは便利だと、リノが言って、グレームはすぐ入れました。",
-			romaji: "Kono apuri wa benri da to, Rino ga itte, Gureemu wa sugu iremashita.",
-			english: "Rino said this app is convenient, and Graeme installed it right away.",
+			japanese:
+				"このアプリは便利だと、リノが言って、グレームはすぐ入れました。",
+			romaji:
+				"Kono apuri wa benri da to, Rino ga itte, Gureemu wa sugu iremashita.",
+			english:
+				"Rino said this app is convenient, and Graeme installed it right away.",
 		},
 	},
 	{
@@ -2497,10 +2613,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "na-adjective",
 		jlpt: "N4",
 		example: {
-			japanese: "パスポートは必要だと、リノが言って、グレームはポケットを確認しました。",
+			japanese:
+				"パスポートは必要だと、リノが言って、グレームはポケットを確認しました。",
 			romaji:
 				"Pasupooto wa hitsuyou da to, Rino ga itte, Gureemu wa poketto o kakunin shimashita.",
-			english: "Rino said a passport is necessary, and Graeme checked his pocket.",
+			english:
+				"Rino said a passport is necessary, and Graeme checked his pocket.",
 		},
 	},
 	{
@@ -2512,7 +2630,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "リノは「これは大切」と言って、グレームは大事に持ちました。",
-			romaji: "Rino wa \"Kore wa taisetsu\" to itte, Gureemu wa daiji ni mochimashita.",
+			romaji:
+				'Rino wa "Kore wa taisetsu" to itte, Gureemu wa daiji ni mochimashita.',
 			english: "Rino said “This is important,” and Graeme held it carefully.",
 		},
 	},
@@ -2525,7 +2644,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "リノは「安全だよ」と言って、グレームは安心しました。",
-			romaji: "Rino wa \"Anzen da yo\" to itte, Gureemu wa anshin shimashita.",
+			romaji: 'Rino wa "Anzen da yo" to itte, Gureemu wa anshin shimashita.',
 			english: "Rino said “It’s safe,” and Graeme relaxed.",
 		},
 	},
@@ -2538,7 +2657,7 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "リノは「危ない！」と言って、グレームのうでを引きました。",
-			romaji: "Rino wa \"Abunai!\" to itte, Gureemu no ude o hikimashita.",
+			romaji: 'Rino wa "Abunai!" to itte, Gureemu no ude o hikimashita.',
 			english: "Rino yelled “Danger!” and pulled Graeme’s arm.",
 		},
 	},
@@ -2564,7 +2683,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "北海道旅行の準備をして、グレームとリノはわくわくしました。",
-			romaji: "Hokkaidou ryokou no junbi o shite, Gureemu to Rino wa wakuwaku shimashita.",
+			romaji:
+				"Hokkaidou ryokou no junbi o shite, Gureemu to Rino wa wakuwaku shimashita.",
 			english: "Preparing for a Hokkaido trip, Graeme and Rino got excited.",
 		},
 	},
@@ -2577,7 +2697,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "毎日練習して、グレームとリノは上手になりました。",
-			romaji: "Mainichi renshuu shite, Gureemu to Rino wa jouzu ni narimashita.",
+			romaji:
+				"Mainichi renshuu shite, Gureemu to Rino wa jouzu ni narimashita.",
 			english: "They practiced every day, and Graeme and Rino improved.",
 		},
 	},
@@ -2589,10 +2710,12 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "verb",
 		jlpt: "N4",
 		example: {
-			japanese: "行き先を決めて、リノは「横浜！」と言い、グレームは「北海道！」と言いました。",
+			japanese:
+				"行き先を決めて、リノは「横浜！」と言い、グレームは「北海道！」と言いました。",
 			romaji:
-				"Ikisaki o kimete, Rino wa \"Yokohama!\" to ii, Gureemu wa \"Hokkaidou!\" to iimashita.",
-			english: "They decided the destination: Rino said “Yokohama!” and Graeme said “Hokkaido!”",
+				'Ikisaki o kimete, Rino wa "Yokohama!" to ii, Gureemu wa "Hokkaidou!" to iimashita.',
+			english:
+				"They decided the destination: Rino said “Yokohama!” and Graeme said “Hokkaido!”",
 		},
 	},
 	{
@@ -2604,7 +2727,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "リノは予約を確認して、グレームは「完璧」と言いました。",
-			romaji: "Rino wa yoyaku o kakunin shite, Gureemu wa \"Kanpeki\" to iimashita.",
+			romaji:
+				'Rino wa yoyaku o kakunin shite, Gureemu wa "Kanpeki" to iimashita.',
 			english: "Rino confirmed the reservation, and Graeme said “Perfect.”",
 		},
 	},
@@ -2629,7 +2753,8 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N4",
 		example: {
 			japanese: "北海道旅行の話で、グレームとリノは盛り上がりました。",
-			romaji: "Hokkaidou ryokou no hanashi de, Gureemu to Rino wa moriagarimashita.",
+			romaji:
+				"Hokkaidou ryokou no hanashi de, Gureemu to Rino wa moriagarimashita.",
 			english: "Talking about a Hokkaido trip, Graeme and Rino got hyped.",
 		},
 	},
@@ -2641,8 +2766,9 @@ export const WORDS: WordEntry[] = [
 		partOfSpeech: "noun",
 		jlpt: "N5",
 		example: {
-			japanese: "グレームはお土産を買って、リノは「センスいい！」と言いました。",
-			romaji: "Gureemu wa omiyage o katte, Rino wa \"Sensu ii!\" to iimashita.",
+			japanese:
+				"グレームはお土産を買って、リノは「センスいい！」と言いました。",
+			romaji: 'Gureemu wa omiyage o katte, Rino wa "Sensu ii!" to iimashita.',
 			english: "Graeme bought souvenirs, and Rino said “Great taste!”",
 		},
 	},
@@ -2655,8 +2781,9 @@ export const WORDS: WordEntry[] = [
 		jlpt: "N5",
 		example: {
 			japanese: "天気を見て、リノは「雨」、グレームは「傘！」と言いました。",
-			romaji: "Tenki o mite, Rino wa \"Ame\", Gureemu wa \"Kasa!\" to iimashita.",
-			english: "Checking the weather, Rino said “Rain,” and Graeme said “Umbrella!”",
+			romaji: 'Tenki o mite, Rino wa "Ame", Gureemu wa "Kasa!" to iimashita.',
+			english:
+				"Checking the weather, Rino said “Rain,” and Graeme said “Umbrella!”",
 		},
 	},
 ];
