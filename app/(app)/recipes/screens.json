@@ -303,5 +303,29 @@
 		},
 		"version": "0.1.0",
 		"category": "display-components"
+	},
+	"bird-image": {
+		"title": "Bird Image",
+		"published": true,
+		"createdAt": "2026-03-28T00:00:00Z",
+		"updatedAt": "2026-03-28T00:00:00Z",
+		"description": "Shows the latest BirdNET detection and displays a matching local image from this recipe's images folder.",
+		"componentPath": "./screens/bird-image",
+		"hasDataFetch": true,
+		"props": {
+			"latestBird": null,
+			"imageSrc": null,
+			"imageFileName": null,
+			"imageCandidates": []
+		},
+		"params": {},
+		"tags": ["api", "live-data", "image", "birds", "wildlife"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {},
+		"version": "0.1.0",
+		"category": "display-components"
 	}
 }
