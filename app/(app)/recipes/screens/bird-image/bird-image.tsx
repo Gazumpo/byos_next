@@ -86,6 +86,7 @@ export default async function BirdImage({
 								width={width - 32}
 								height={height - 140}
 								className="h-full w-full object-contain"
+								style={{ filter: "invert(1)" }}
 							/>
 						</div>
 					) : (

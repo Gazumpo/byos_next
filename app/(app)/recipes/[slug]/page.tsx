@@ -186,7 +186,10 @@ const RenderComponent = ({
 				width={imageWidth}
 				height={imageHeight}
 				src={`data:image/bmp;base64,${renders.bitmap.toString("base64")}`}
-				style={{ imageRendering: "pixelated" }}
+				style={{
+					imageRendering: "pixelated",
+					filter: "invert(1)",
+				}}
 				alt={`${title} BMP render`}
 				className="w-full object-cover"
 			/>
