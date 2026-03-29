@@ -1,6 +1,9 @@
 import { unstable_cache } from "next/cache";
-import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import {
+	buildImageCandidates,
+	findBirdImageForCandidates,
+} from "../bird-image-utils";
 import type { BirdRecord } from "../birds/getData";
 
 export const dynamic = "force-dynamic";
@@ -25,15 +28,6 @@ const IMAGE_DIRECTORY = path.join(
 	"images",
 );
 
-const MIME_TYPES: Record<string, string> = {
-	".png": "image/png",
-	".jpg": "image/jpeg",
-	".jpeg": "image/jpeg",
-	".webp": "image/webp",
-	".gif": "image/gif",
-	".bmp": "image/bmp",
-};
-
 const buildBirdApiUrl = () => {
 	const url = new URL(BIRD_API);
 	url.searchParams.set("limit", String(BIRD_API_LIMIT));
@@ -44,30 +38,6 @@ type NextRequestInit = RequestInit & {
 	next?: {
 		revalidate?: number;
 	};
-};
-
-const normalizeBirdName = (value?: string) =>
-	(value || "")
-		.normalize("NFKD")
-		.replace(/[\u0300-\u036f]/g, "")
-		.toLowerCase()
-		.replace(/[^a-z0-9]+/g, "-")
-		.replace(/^-+|-+$/g, "");
-
-const scientificNameToFileStem = (value?: string) =>
-	(value || "")
-		.trim()
-		.replace(/\s+/g, "_")
-		.replace(/[^\w-]+/g, "");
-
-const buildImageCandidates = (bird: BirdRecord | null) => {
-	const scientificStem = scientificNameToFileStem(bird?.Sci_Name);
-	if (!scientificStem) return [];
-
-	const normalizedStem = normalizeBirdName(bird?.Sci_Name);
-	return Array.from(
-		new Set([scientificStem, normalizedStem].filter(Boolean)),
-	);
 };
 
 const getDateKey = (value?: string) => {
@@ -137,60 +107,6 @@ async function fetchLatestBirdNoCache(): Promise<BirdRecord | null> {
 	}
 }
 
-async function findBirdImage(
-	candidates: string[],
-): Promise<{ imageSrc: string | null; imageFileName: string | null }> {
-	if (candidates.length === 0) {
-		return { imageSrc: null, imageFileName: null };
-	}
-
-	try {
-		const entries = await readdir(IMAGE_DIRECTORY, { withFileTypes: true });
-		const files = entries
-			.filter((entry) => entry.isFile())
-			.map((entry) => {
-				const extension = path.extname(entry.name).toLowerCase();
-				const basename = path.basename(entry.name, extension);
-				return {
-					name: entry.name,
-					extension,
-					fullPath: path.join(IMAGE_DIRECTORY, entry.name),
-					basename,
-					normalizedBase: normalizeBirdName(basename),
-				};
-			})
-			.filter((file) => MIME_TYPES[file.extension]);
-
-		const exactMatch =
-			files.find((file) => candidates.includes(file.basename)) ||
-			files.find((file) => candidates.includes(file.normalizedBase));
-		const markMatch =
-			exactMatch ||
-			files.find((file) =>
-				candidates.some((candidate) => file.basename === `${candidate}_mark`),
-			) ||
-			files.find((file) =>
-				candidates.some((candidate) =>
-					file.normalizedBase === `${candidate}-mark`,
-				),
-			);
-
-		if (!markMatch) {
-			return { imageSrc: null, imageFileName: null };
-		}
-
-		const buffer = await readFile(markMatch.fullPath);
-		const mimeType = MIME_TYPES[markMatch.extension];
-		return {
-			imageSrc: `data:${mimeType};base64,${buffer.toString("base64")}`,
-			imageFileName: markMatch.name,
-		};
-	} catch (error) {
-		console.error("Error loading bird image:", error);
-		return { imageSrc: null, imageFileName: null };
-	}
-}
-
 const getCachedLatestBird = unstable_cache(
 	async (): Promise<BirdRecord | null> => fetchLatestBirdNoCache(),
 	["bird-image-latest-bird"],
@@ -200,8 +116,11 @@ const getCachedLatestBird = unstable_cache(
 export default async function getData(): Promise<BirdImageData> {
 	try {
 		const latestBird = await getCachedLatestBird();
-		const imageCandidates = buildImageCandidates(latestBird);
-		const { imageSrc, imageFileName } = await findBirdImage(imageCandidates);
+		const imageCandidates = buildImageCandidates(latestBird?.Sci_Name);
+		const { imageSrc, imageFileName } = await findBirdImageForCandidates(
+			imageCandidates,
+			IMAGE_DIRECTORY,
+		);
 
 		return {
 			latestBird,
@@ -212,8 +131,11 @@ export default async function getData(): Promise<BirdImageData> {
 	} catch (error) {
 		console.log("Cache skipped for bird-image, fallback:", error);
 		const latestBird = await fetchLatestBirdNoCache();
-		const imageCandidates = buildImageCandidates(latestBird);
-		const { imageSrc, imageFileName } = await findBirdImage(imageCandidates);
+		const imageCandidates = buildImageCandidates(latestBird?.Sci_Name);
+		const { imageSrc, imageFileName } = await findBirdImageForCandidates(
+			imageCandidates,
+			IMAGE_DIRECTORY,
+		);
 
 		return {
 			latestBird,

@@ -12,7 +12,7 @@ const DashboardRuntime = async () => {
 
 	// Get data from the centralized getInitData
 	// Since this is cached, it won't cause duplicate requests
-	const { devices, systemLogs, dbStatus } = await getInitData();
+	const { devices, playlistItems, systemLogs, dbStatus } = await getInitData();
 
 	// Now we can safely use new Date() after accessing headers
 	const currentHour = new Date().getHours();
@@ -141,7 +141,11 @@ const DashboardRuntime = async () => {
 					Good {greeting}
 				</h2>
 			</div>
-			<DashboardContent devices={devices} systemLogs={systemLogs} />
+			<DashboardContent
+				devices={devices}
+				playlistItems={playlistItems}
+				systemLogs={systemLogs}
+			/>
 		</>
 	);
 };

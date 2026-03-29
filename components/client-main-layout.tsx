@@ -103,15 +103,6 @@ export function ClientMainLayout({
 							<Sun className="size-5 dark:hidden" />
 							<Moon className="hidden size-5 dark:block" />
 						</Button>
-
-						<Button variant="ghost" size="icon" asChild>
-							<Link
-								href="https://github.com/usetrmnl/byos_next"
-								target="_blank"
-							>
-								<Github className="size-5" />
-							</Link>
-						</Button>
 					</div>
 				</header>
 

@@ -1,6 +1,17 @@
 import { PreSatori } from "@/utils/pre-satori";
+import path from "node:path";
+import { findBirdImagesForScientificNames } from "../bird-image-utils";
 import type { BirdData } from "./getData";
-import { BirdIcon } from "./icons";
+
+const IMAGE_DIRECTORY = path.join(
+	process.cwd(),
+	"app",
+	"(app)",
+	"recipes",
+	"screens",
+	"birds",
+	"images",
+);
 
 export default async function Birds({
 	items = [],
@@ -65,13 +76,14 @@ export default async function Birds({
 	type BirdSummary = {
 		key: string;
 		name: string;
+		sciName: string;
 		count: number;
 		bestConfidence: number;
 		lastTime: string;
 		lastMinutes: number;
 	};
 
-	const { summaries, detectionsToday, speciesToday } = Array.isArray(items)
+	const { summaries, detectionsToday } = Array.isArray(items)
 		? (() => {
 				const map = new Map<string, BirdSummary>();
 				let detections = 0;
@@ -84,6 +96,7 @@ export default async function Birds({
 					if (!key) continue;
 
 					const name = item.Com_Name || item.Sci_Name || key;
+					const sciName = item.Sci_Name || "";
 					const minutes = timeToMinutes(item.Time);
 					const timeLabel = formatTime(item.Time);
 					const confidence =
@@ -94,6 +107,7 @@ export default async function Birds({
 						map.set(key, {
 							key,
 							name,
+							sciName,
 							count: 1,
 							bestConfidence: confidence,
 							lastTime: timeLabel,
@@ -109,6 +123,9 @@ export default async function Birds({
 					if (minutes > existing.lastMinutes) {
 						existing.lastMinutes = minutes;
 						existing.lastTime = timeLabel;
+						if (sciName) {
+							existing.sciName = sciName;
+						}
 					}
 				}
 
@@ -124,10 +141,14 @@ export default async function Birds({
 				return {
 					summaries: all.slice(0, maxItems),
 					detectionsToday: detections,
-					speciesToday: map.size,
 				};
 			})()
-		: { summaries: [] as BirdSummary[], detectionsToday: 0, speciesToday: 0 };
+		: { summaries: [] as BirdSummary[], detectionsToday: 0 };
+
+	const birdImages = await findBirdImagesForScientificNames(
+		summaries.map((item) => item.sciName),
+		IMAGE_DIRECTORY,
+	);
 
 	const columns = (() => {
 		const columnCount = isSingleColumn ? 1 : 2;
@@ -137,13 +158,6 @@ export default async function Birds({
 		}
 		return next;
 	})();
-
-	const headerDate = new Intl.DateTimeFormat("en-AU", {
-		timeZone,
-		weekday: "short",
-		month: "short",
-		day: "2-digit",
-	}).format(new Date());
 
 	const headerTime = new Intl.DateTimeFormat("en-GB", {
 		timeZone,
@@ -184,13 +198,16 @@ export default async function Birds({
 									className="flex flex-1 min-w-0 flex-col gap-2"
 								>
 									{col.map((item) => {
+										const imageMatch = birdImages.get(item.sciName);
+										const thumbnailSize = isHalfScreen ? 28 : 36;
+
 										return (
 											<div
 												key={item.key}
 												className={`flex items-center justify-between border-2 border-black rounded-md ${isHalfScreen ? "px-2 py-2" : "px-3 py-2"} ${isHalfScreen ? "text-2xl" : "text-2xl"}`}
 											>
 												<div className="flex-1 min-w-0 pr-2 font-semibold overflow-hidden">
-													{truncate(item.name, isHalfScreen ? 20 : 26)}
+													{truncate(item.name, isHalfScreen ? 16 : 22)}
 												</div>
 												<div className="flex items-center justify-end gap-3 tabular-nums">
 													<div className="font-bold w-[5ch] text-right flex-none">
@@ -198,6 +215,24 @@ export default async function Birds({
 													</div>
 													<div className="text-xl w-[3ch] text-right flex-none">
 														×{item.count}
+													</div>
+													<div
+														className="flex flex-none items-center justify-center overflow-hidden bg-white"
+														style={{
+															width: thumbnailSize,
+															height: thumbnailSize,
+														}}
+													>
+														{imageMatch?.imageSrc ? (
+															<img
+																src={imageMatch.imageSrc}
+																alt={item.name}
+																width={thumbnailSize}
+																height={thumbnailSize}
+																className="h-full w-full object-cover"
+																style={{ filter: "invert(1)" }}
+															/>
+														) : null}
 													</div>
 												</div>
 											</div>

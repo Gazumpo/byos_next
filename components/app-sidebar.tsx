@@ -106,7 +106,6 @@ export function AppSidebar({
 										variant="secondary"
 										className="w-fit text-[10px] px-1 py-0"
 									>
-										beta
 									</Badge>
 								</div>
 							</Link>

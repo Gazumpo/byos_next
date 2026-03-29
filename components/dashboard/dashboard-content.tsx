@@ -22,20 +22,133 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { DeviceDisplayMode } from "@/lib/mixup/constants";
 import {
 	DEFAULT_IMAGE_HEIGHT,
 	DEFAULT_IMAGE_WIDTH,
 } from "@/lib/recipes/constants";
-import type { Device, SystemLog } from "@/lib/types";
+import type { Device, PlaylistItem, SystemLog } from "@/lib/types";
 import { formatDate, getDeviceStatus } from "@/utils/helpers";
 
 interface DashboardContentProps {
 	devices: Device[];
+	playlistItems: PlaylistItem[];
 	systemLogs: SystemLog[];
 }
 
+const getGrayscaleLevels = (grayscale: number | null | undefined): number => {
+	if (grayscale === 2 || grayscale === 4 || grayscale === 16) {
+		return grayscale;
+	}
+
+	return 2;
+};
+
+const isTimeInRange = (
+	timeToCheck: string,
+	startTime: string,
+	endTime: string,
+): boolean => {
+	if (startTime > endTime) {
+		return timeToCheck >= startTime || timeToCheck < endTime;
+	}
+
+	return timeToCheck >= startTime && timeToCheck < endTime;
+};
+
+const getPlaylistPreviewScreen = (
+	device: Device,
+	playlistItems: PlaylistItem[],
+): string | null => {
+	if (!device.playlist_id) {
+		return device.screen;
+	}
+
+	const items = playlistItems
+		.filter((item) => item.playlist_id === device.playlist_id)
+		.sort((a, b) => a.order_index - b.order_index);
+
+	if (items.length === 0) {
+		return device.screen;
+	}
+
+	const currentIndex = device.current_playlist_index || 0;
+	const currentItem =
+		items.find((item) => item.order_index === currentIndex) ||
+		items[currentIndex] ||
+		null;
+
+	if (currentItem) {
+		return currentItem.screen_id;
+	}
+
+	const now = new Date();
+	const options = {
+		timeZone: device.timezone || "UTC",
+		hour12: false,
+	} as Intl.DateTimeFormatOptions;
+
+	const timeFormatter = new Intl.DateTimeFormat("en-US", {
+		...options,
+		hour: "2-digit",
+		minute: "2-digit",
+	});
+	const [{ value: hour }, , { value: minute }] =
+		timeFormatter.formatToParts(now);
+	const currentTime = `${hour}:${minute}`;
+
+	const dayFormatter = new Intl.DateTimeFormat("en-US", {
+		...options,
+		weekday: "long",
+	});
+	const currentDay = dayFormatter.format(now).toLowerCase();
+
+	for (let i = 1; i < items.length + 1; i++) {
+		const itemIndex = (currentIndex + i) % items.length;
+		const item = items[itemIndex];
+
+		const isTimeValid =
+			!item.start_time ||
+			!item.end_time ||
+			isTimeInRange(currentTime, item.start_time, item.end_time);
+		const isDayValid =
+			!item.days_of_week ||
+			(Array.isArray(item.days_of_week) &&
+				item.days_of_week.includes(currentDay));
+
+		if (isTimeValid && isDayValid) {
+			return item.screen_id;
+		}
+	}
+
+	return device.screen;
+};
+
+const getDevicePreviewSrc = (
+	device: Device,
+	playlistItems: PlaylistItem[],
+	width: number,
+	height: number,
+	grayscale: number,
+): string => {
+	if (
+		device.display_mode === DeviceDisplayMode.MIXUP &&
+		device.mixup_id
+	) {
+		return `/api/bitmap/mixup/${device.mixup_id}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
+	}
+
+	const screenToDisplay =
+		device.display_mode === DeviceDisplayMode.PLAYLIST
+			? getPlaylistPreviewScreen(device, playlistItems)
+			: device.screen;
+
+	return `/api/bitmap/${screenToDisplay || "not-found"}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
+};
+
 export const DashboardContent = ({
 	devices,
+	playlistItems,
 	systemLogs,
 }: DashboardContentProps) => {
 	// Process devices data
@@ -50,7 +163,7 @@ export const DashboardContent = ({
 	// Get the most recently updated device
 	const lastUpdatedDevice =
 		processedDevices.length > 0
-			? processedDevices.sort(
+			? [...processedDevices].sort(
 					(a, b) =>
 						new Date(b.last_update_time || "").getTime() -
 						new Date(a.last_update_time || "").getTime(),
@@ -66,6 +179,16 @@ export const DashboardContent = ({
 		orientation === "landscape"
 			? lastUpdatedDevice?.screen_height || DEFAULT_IMAGE_HEIGHT
 			: lastUpdatedDevice?.screen_width || DEFAULT_IMAGE_WIDTH;
+	const grayscaleLevels = getGrayscaleLevels(lastUpdatedDevice?.grayscale);
+	const previewSrc = lastUpdatedDevice
+		? getDevicePreviewSrc(
+				lastUpdatedDevice,
+				playlistItems,
+				deviceWidth,
+				deviceHeight,
+				grayscaleLevels,
+			)
+		: null;
 
 	const maxPreviewWidth = orientation === "landscape" ? 500 : 300;
 	return (
@@ -95,7 +218,7 @@ export const DashboardContent = ({
 										className="w-full"
 									>
 										<Image
-											src={`/api/bitmap/${lastUpdatedDevice?.screen}.bmp?width=${deviceWidth}&height=${deviceHeight}`}
+											src={previewSrc || "/api/bitmap/not-found.bmp"}
 											alt="Device Screen"
 											fill
 											className="object-contain rounded-xs ring-2 ring-gray-200"
