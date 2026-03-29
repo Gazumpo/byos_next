@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import SystemLogsViewer from "@/components/system-logs/system-logs-viewer";
 import SystemLogsViewerSkeleton from "@/components/system-logs/system-logs-viewer-skeleton";
@@ -13,6 +14,9 @@ export const metadata = {
 
 // SystemLogs data component that uses cached data
 const SystemLogsData = async () => {
+	const headersList = await headers();
+	const _userAgent = headersList.get("user-agent");
+
 	// Get data from the centralized getInitData (cached)
 	const { systemLogs, uniqueSources, totalLogs, dbStatus } =
 		await getInitData();

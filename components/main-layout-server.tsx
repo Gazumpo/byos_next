@@ -26,6 +26,11 @@ export default async function MainLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	// Access request-scoped data inside the Suspense-wrapped layout so device data
+	// is always evaluated at request time, even when auth is disabled.
+	const headersList = await headers();
+	const _userAgent = headersList.get("user-agent");
+
 	// Centralized data fetching using getInitData
 	// This is cached and shared across all components using React's cache() mechanism
 	const { devices, dbStatus } = await getInitData();

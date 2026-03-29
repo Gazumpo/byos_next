@@ -6,14 +6,34 @@ import { DbInitializer } from "@/components/dashboard/db-initializer";
 import { Badge } from "@/components/ui/badge";
 import { getInitData } from "@/lib/getInitData";
 
-// Dashboard data component that uses the cached data
-const DashboardData = async () => {
+const DashboardRuntime = async () => {
+	const headersList = await headers();
+	const _userAgent = headersList.get("user-agent");
+
 	// Get data from the centralized getInitData
 	// Since this is cached, it won't cause duplicate requests
 	const { devices, systemLogs, dbStatus } = await getInitData();
+
+	// Now we can safely use new Date() after accessing headers
+	const currentHour = new Date().getHours();
+	const greeting =
+		currentHour < 12
+			? "morning ☀️"
+			: currentHour < 18
+				? "afternoon ☕️"
+				: "evening 🌙";
+
 	if (!dbStatus.ready) {
 		return (
 			<>
+				<div className="mb-6">
+					<h2 className="mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 flex items-center">
+						Good {greeting}
+						<Badge className="ml-2 bg-blue-100 text-blue-700 border-blue-200">
+							noDB mode
+						</Badge>
+					</h2>
+				</div>
 				<div className="mt-4 rounded-lg p-4 border border-muted shadow">
 					{dbStatus.error === "ERROR_ENV_VAR_DATABASE_URL_NOT_SET" && (
 						<div className="p-4">
@@ -114,44 +134,22 @@ const DashboardData = async () => {
 		);
 	}
 
-	return <DashboardContent devices={devices} systemLogs={systemLogs} />;
-};
-
-export default async function Dashboard() {
-	// Access headers first to allow time-based operations in Server Component
-	// We need to actually read from headers to access uncached request data
-	const headersList = await headers();
-	// Read a header to ensure we've accessed uncached request data
-	const _userAgent = headersList.get("user-agent");
-
-	// Get minimal data for the header only
-	const { dbStatus } = await getInitData();
-
-	// Now we can safely use new Date() after accessing headers
-	const currentHour = new Date().getHours();
-	const greeting =
-		currentHour < 12
-			? "morning ☀️"
-			: currentHour < 18
-				? "afternoon ☕️"
-				: "evening 🌙";
-
 	return (
 		<>
 			<div className="mb-6">
 				<h2 className="mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 flex items-center">
 					Good {greeting}
-					{!dbStatus.ready && (
-						<Badge className="ml-2 bg-blue-100 text-blue-700 border-blue-200">
-							noDB mode
-						</Badge>
-					)}
 				</h2>
 			</div>
-
-			<Suspense fallback={<DashboardSkeleton />}>
-				<DashboardData />
-			</Suspense>
+			<DashboardContent devices={devices} systemLogs={systemLogs} />
 		</>
+	);
+};
+
+export default function Dashboard() {
+	return (
+		<Suspense fallback={<DashboardSkeleton />}>
+			<DashboardRuntime />
+		</Suspense>
 	);
 }

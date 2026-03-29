@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { getCurrentUserId } from "@/lib/auth/get-user";
 import { db } from "@/lib/database/db";
 import {
@@ -95,6 +96,8 @@ export async function createPlaylist(name: string): Promise<{
 			.returningAll()
 			.executeTakeFirst();
 
+		revalidatePath("/playlists");
+
 		return { success: true, playlist: playlist as unknown as Playlist };
 	} catch (error) {
 		console.error("Error creating playlist:", error);
@@ -128,6 +131,8 @@ export async function updatePlaylist(
 				.execute(),
 		);
 
+		revalidatePath("/playlists");
+
 		return { success: true };
 	} catch (error) {
 		console.error("Error updating playlist:", error);
@@ -156,6 +161,8 @@ export async function deletePlaylist(playlistId: string): Promise<{
 		await withUserScope((scopedDb) =>
 			scopedDb.deleteFrom("playlists").where("id", "=", playlistId).execute(),
 		);
+
+		revalidatePath("/playlists");
 
 		return { success: true };
 	} catch (error) {
@@ -198,6 +205,8 @@ export async function createPlaylistItem(
 			.returningAll()
 			.executeTakeFirst();
 
+		revalidatePath("/playlists");
+
 		return { success: true, item: newItem as unknown as PlaylistItem };
 	} catch (error) {
 		console.error("Error creating playlist item:", error);
@@ -234,6 +243,8 @@ export async function updatePlaylistItem(
 			.where("id", "=", itemId)
 			.execute();
 
+		revalidatePath("/playlists");
+
 		return { success: true };
 	} catch (error) {
 		console.error("Error updating playlist item:", error);
@@ -260,6 +271,8 @@ export async function deletePlaylistItem(itemId: string): Promise<{
 
 	try {
 		await db.deleteFrom("playlist_items").where("id", "=", itemId).execute();
+
+		revalidatePath("/playlists");
 
 		return { success: true };
 	} catch (error) {
@@ -346,6 +359,8 @@ export async function savePlaylistWithItems(playlistData: {
 
 				await trx.insertInto("playlist_items").values(itemsToInsert).execute();
 			}
+
+			revalidatePath("/playlists");
 
 			return { success: true, playlistId };
 		});

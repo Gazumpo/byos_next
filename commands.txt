@@ -16,6 +16,7 @@ ssh graeme@birdnet.local
 scp -r /Users/graeme/Projects/BYOS_next/docker-compose.yml graeme@birdnet.local:/home/graeme/byos_next/docker-compose.yml
 
 scp -r "/Users/graeme/Projects/byos_next/app/" "graeme@birdnet.local:/home/graeme/byos_next/"
+scp -r "/Users/graeme/Projects/byos_next/components/" "graeme@birdnet.local:/home/graeme/byos_next/"
 scp -r "/Users/graeme/Projects/byos_next/app/(app)/recipes/screens/" "graeme@birdnet.local:/home/graeme/byos_next/app/(app)/recipes/"
 scp -r "/Users/graeme/Projects/byos_next/components" "graeme@birdnet.local:/home/graeme/byos_next/"
 scp -r "/Users/graeme/Projects/byos_next/lib" "graeme@birdnet.local:/home/graeme/byos_next/"

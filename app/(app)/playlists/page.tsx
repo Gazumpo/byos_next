@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import { PlaylistPageClient } from "@/components/playlists/playlist-page-client";
 import { getInitData } from "@/lib/getInitData";
@@ -7,9 +8,22 @@ export const metadata = {
 	description: "Manage your device playlists",
 };
 
-export default async function PlaylistsPage() {
+const PlaylistsData = async () => {
+	const headersList = await headers();
+	const _userAgent = headersList.get("user-agent");
+
 	const { playlists, playlistItems, mixups } = await getInitData();
 
+	return (
+		<PlaylistPageClient
+			initialPlaylists={playlists}
+			initialPlaylistItems={playlistItems}
+			initialMixups={mixups}
+		/>
+	);
+};
+
+export default function PlaylistsPage() {
 	return (
 		<div className="space-y-6">
 			<div className="flex justify-between items-center">
@@ -22,11 +36,7 @@ export default async function PlaylistsPage() {
 			</div>
 
 			<Suspense fallback={<div>Loading playlists...</div>}>
-				<PlaylistPageClient
-					initialPlaylists={playlists}
-					initialPlaylistItems={playlistItems}
-					initialMixups={mixups}
-				/>
+				<PlaylistsData />
 			</Suspense>
 		</div>
 	);
