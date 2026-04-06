@@ -243,12 +243,6 @@ export default async function Birds({
 						</div>
 					)}
 				</div>
-
-				<div
-					className={`border-t-2 border-black pt-2 flex justify-between ${isHalfScreen ? "text-lg" : "text-xl"}`}
-				>
-					<div>{detectionsToday} detections today</div>
-				</div>
 			</div>
 		</PreSatori>
 	);
