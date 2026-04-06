@@ -14,26 +14,9 @@ const DashboardRuntime = async () => {
 	// Since this is cached, it won't cause duplicate requests
 	const { devices, playlistItems, systemLogs, dbStatus } = await getInitData();
 
-	// Now we can safely use new Date() after accessing headers
-	const currentHour = new Date().getHours();
-	const greeting =
-		currentHour < 12
-			? "morning ☀️"
-			: currentHour < 18
-				? "afternoon ☕️"
-				: "evening 🌙";
-
 	if (!dbStatus.ready) {
 		return (
 			<>
-				<div className="mb-6">
-					<h2 className="mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 flex items-center">
-						Good {greeting}
-						<Badge className="ml-2 bg-blue-100 text-blue-700 border-blue-200">
-							noDB mode
-						</Badge>
-					</h2>
-				</div>
 				<div className="mt-4 rounded-lg p-4 border border-muted shadow">
 					{dbStatus.error === "ERROR_ENV_VAR_DATABASE_URL_NOT_SET" && (
 						<div className="p-4">
@@ -136,11 +119,6 @@ const DashboardRuntime = async () => {
 
 	return (
 		<>
-			<div className="mb-6">
-				<h2 className="mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 flex items-center">
-					Good {greeting}
-				</h2>
-			</div>
 			<DashboardContent
 				devices={devices}
 				playlistItems={playlistItems}

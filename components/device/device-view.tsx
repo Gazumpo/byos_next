@@ -10,6 +10,7 @@ import {
 } from "@/lib/recipes/constants";
 import type { Device } from "@/lib/types";
 import {
+	calculateRefreshPerDay,
 	estimateBatteryLife,
 	formatDate,
 	formatTimezone,
@@ -22,49 +23,6 @@ const getSignalQuality = (rssi: number): string => {
 	if (rssi >= -70) return "Fair";
 	if (rssi >= -80) return "Poor";
 	return "Very Poor";
-};
-
-// Calculate refresh per day based on refresh schedule
-const calculateRefreshPerDay = (
-	deviceData: Device & { status?: string; type?: string },
-): number => {
-	if (!deviceData || !deviceData.refresh_schedule) return 0;
-
-	// Default refresh rate in seconds
-	const defaultRefreshRate =
-		deviceData.refresh_schedule.default_refresh_rate || 300;
-
-	// Calculate refreshes per day from default rate
-	let refreshesPerDay = (24 * 60 * 60) / defaultRefreshRate;
-
-	// Adjust for time ranges if they exist
-	if (
-		deviceData.refresh_schedule.time_ranges &&
-		deviceData.refresh_schedule.time_ranges.length > 0
-	) {
-		// This is a simplified calculation - a more accurate one would account for overlapping ranges
-		for (const range of deviceData.refresh_schedule.time_ranges) {
-			// Parse start and end times
-			const [startHour, startMinute] = range.start_time.split(":").map(Number);
-			const [endHour, endMinute] = range.end_time.split(":").map(Number);
-
-			// Calculate duration in hours
-			const startTimeInMinutes = startHour * 60 + startMinute;
-			const endTimeInMinutes = endHour * 60 + endMinute;
-			const durationInHours = (endTimeInMinutes - startTimeInMinutes) / 60;
-
-			// Calculate refreshes during this time range
-			const rangeRefreshes = (durationInHours * 60 * 60) / range.refresh_rate;
-
-			// Subtract default refreshes during this period and add custom refreshes
-			refreshesPerDay =
-				refreshesPerDay -
-				(durationInHours * 60 * 60) / defaultRefreshRate +
-				rangeRefreshes;
-		}
-	}
-
-	return Math.max(0, refreshesPerDay);
 };
 
 // Map grayscale value to number of gray levels (2, 4, or 16)

@@ -217,6 +217,35 @@ export const formatTimezone = (timezone: string): string => {
 	return found ? found.label : timezone;
 };
 
+export function calculateRefreshPerDay(device: Device): number {
+	if (!device.refresh_schedule) return 0;
+
+	const defaultRefreshRate = device.refresh_schedule.default_refresh_rate || 300;
+	let refreshesPerDay = (24 * 60 * 60) / defaultRefreshRate;
+
+	for (const range of device.refresh_schedule.time_ranges || []) {
+		const [startHour, startMinute] = range.start_time.split(":").map(Number);
+		const [endHour, endMinute] = range.end_time.split(":").map(Number);
+		const startTimeInMinutes = startHour * 60 + startMinute;
+		const endTimeInMinutes = endHour * 60 + endMinute;
+		let durationInMinutes = endTimeInMinutes - startTimeInMinutes;
+
+		if (durationInMinutes <= 0) {
+			durationInMinutes += 24 * 60;
+		}
+
+		const durationInHours = durationInMinutes / 60;
+		const rangeRefreshes = (durationInHours * 60 * 60) / range.refresh_rate;
+
+		refreshesPerDay =
+			refreshesPerDay -
+			(durationInHours * 60 * 60) / defaultRefreshRate +
+			rangeRefreshes;
+	}
+
+	return Math.max(0, refreshesPerDay);
+}
+
 export function estimateBatteryLife(
 	batteryVoltage: number,
 	refreshPerDay: number,

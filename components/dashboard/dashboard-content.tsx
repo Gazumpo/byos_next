@@ -12,7 +12,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import {
 	Table,
@@ -28,7 +27,12 @@ import {
 	DEFAULT_IMAGE_WIDTH,
 } from "@/lib/recipes/constants";
 import type { Device, PlaylistItem, SystemLog } from "@/lib/types";
-import { formatDate, getDeviceStatus } from "@/utils/helpers";
+import {
+	calculateRefreshPerDay,
+	estimateBatteryLife,
+	formatDate,
+	getDeviceStatus,
+} from "@/utils/helpers";
 
 interface DashboardContentProps {
 	devices: Device[];
@@ -146,6 +150,30 @@ const getDevicePreviewSrc = (
 	return `/api/bitmap/${screenToDisplay || "not-found"}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
 };
 
+const getBatteryColorClass = (batteryPercentage: number): string => {
+	if (batteryPercentage < 20) {
+		return "bg-red-500";
+	}
+
+	if (batteryPercentage < 50) {
+		return "bg-yellow-500";
+	}
+
+	return "bg-primary";
+};
+
+const formatBatteryTimeLeft = (remainingDays: number): string => {
+	if (remainingDays >= 2) {
+		return `~${Math.round(remainingDays)} days left`;
+	}
+
+	if (remainingDays >= 1) {
+		return `~${remainingDays.toFixed(1)} days left`;
+	}
+
+	return `~${Math.max(1, Math.round(remainingDays * 24))} hours left`;
+};
+
 export const DashboardContent = ({
 	devices,
 	playlistItems,
@@ -156,207 +184,176 @@ export const DashboardContent = ({
 		...device,
 		status: getDeviceStatus(device),
 	}));
+	const sortedDevices = [...processedDevices].sort(
+		(a, b) =>
+			new Date(b.last_update_time || "").getTime() -
+			new Date(a.last_update_time || "").getTime(),
+	);
 
 	const onlineDevices = processedDevices.filter((d) => d.status === "online");
 	const offlineDevices = processedDevices.filter((d) => d.status === "offline");
-
-	// Get the most recently updated device
-	const lastUpdatedDevice =
-		processedDevices.length > 0
-			? [...processedDevices].sort(
-					(a, b) =>
-						new Date(b.last_update_time || "").getTime() -
-						new Date(a.last_update_time || "").getTime(),
-				)[0]
-			: null;
-
-	const orientation = lastUpdatedDevice?.screen_orientation || "landscape";
-	const deviceWidth =
-		orientation === "landscape"
-			? lastUpdatedDevice?.screen_width || DEFAULT_IMAGE_WIDTH
-			: lastUpdatedDevice?.screen_height || DEFAULT_IMAGE_HEIGHT;
-	const deviceHeight =
-		orientation === "landscape"
-			? lastUpdatedDevice?.screen_height || DEFAULT_IMAGE_HEIGHT
-			: lastUpdatedDevice?.screen_width || DEFAULT_IMAGE_WIDTH;
-	const grayscaleLevels = getGrayscaleLevels(lastUpdatedDevice?.grayscale);
-	const previewSrc = lastUpdatedDevice
-		? getDevicePreviewSrc(
-				lastUpdatedDevice,
-				playlistItems,
-				deviceWidth,
-				deviceHeight,
-				grayscaleLevels,
-			)
-		: null;
-
-	const maxPreviewWidth = orientation === "landscape" ? 500 : 300;
 	return (
 		<>
-			<div className="grid gap-2 md:gap-4 md:grid-cols-2">
-				<Card className="transition-shadow hover:shadow-md hover:border-border/80">
-					<CardHeader>
-						<CardTitle>Latest Screen</CardTitle>
-						<CardDescription suppressHydrationWarning>
-							{lastUpdatedDevice
-								? `Most recent screen, requested by ${lastUpdatedDevice?.name} (${lastUpdatedDevice?.friendly_id}) ${formatDate(lastUpdatedDevice?.last_update_time)}`
-								: "No devices available"}
-						</CardDescription>
-					</CardHeader>
-					<CardContent>
-						{lastUpdatedDevice ? (
-							<div className="flex flex-col items-center">
-								<div
-									className="rounded-xs bg-muted border overflow-hidden w-full"
-									style={{
-										maxWidth: `${maxPreviewWidth}px`,
-										maxHeight: `${(maxPreviewWidth * deviceHeight) / deviceWidth}px`,
-									}}
-								>
-									<AspectRatio
-										ratio={deviceWidth / deviceHeight}
-										className="w-full"
-									>
-										<Image
-											src={previewSrc || "/api/bitmap/not-found.bmp"}
-											alt="Device Screen"
-											fill
-											className="object-contain rounded-xs ring-2 ring-gray-200"
-											style={{ imageRendering: "pixelated" }}
-											unoptimized
-										/>
-									</AspectRatio>
-								</div>
-								<div className="text-xs text-amber-500 dark:text-amber-500/50 mt-2">
-									Warning: due to the passive nature of the device, the screen
-									shown here might be newer than the actual screen
-								</div>
-							</div>
-						) : (
-							<div className="flex flex-col space-y-3">
-								<Skeleton className="h-[240px] w-full rounded-md" />
-								<div className="flex justify-end">
-									<Skeleton className="h-4 w-[200px]" />
-								</div>
-							</div>
-						)}
-					</CardContent>
-				</Card>
+			<Card className="transition-shadow hover:shadow-md hover:border-border/80">
+				<CardContent className="py-4">
+					<div className="flex flex-wrap items-center gap-4 text-sm">
+						<div className="flex items-center gap-2">
+							<span className="text-muted-foreground">Devices</span>
+							<span className="font-semibold">{processedDevices.length}</span>
+						</div>
+						<div className="flex items-center gap-2">
+							<span className="text-muted-foreground">Online</span>
+							<span className="font-semibold">{onlineDevices.length}</span>
+						</div>
+						<div className="flex items-center gap-2">
+							<span className="text-muted-foreground">Offline</span>
+							<span className="font-semibold">{offlineDevices.length}</span>
+						</div>
+					</div>
+				</CardContent>
+			</Card>
 
-				<div className="grid grid-rows-2 gap-2 md:gap-4">
-					<Card className="transition-shadow hover:shadow-md hover:border-border/80">
-						<CardHeader>
-							<CardTitle>System Information</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<div className="space-y-2">
-								<div className="flex justify-between items-center">
-									<span className="text-sm font-medium">Total Devices:</span>
-									<span className="text-sm text-muted-foreground">
-										{processedDevices.length}
-									</span>
-								</div>
-								<div className="flex justify-between items-center">
-									<span className="text-sm font-medium">Online Devices:</span>
-									<span className="text-sm text-muted-foreground">
-										{onlineDevices.length}
-									</span>
-								</div>
-								<div className="flex justify-between items-center">
-									<span className="text-sm font-medium">Offline Devices:</span>
-									<span className="text-sm text-muted-foreground">
-										{offlineDevices.length}
-									</span>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-					<Card className="transition-shadow hover:shadow-md hover:border-border/80">
-						<CardHeader>
-							<CardTitle>System Status</CardTitle>
-							<CardDescription>
-								Overview of all connected devices
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-								<div>
-									<h3 className="text-sm font-medium mb-2">Online Devices</h3>
+			<Card className="mt-2 md:mt-4 transition-shadow hover:shadow-md hover:border-border/80">
+				<CardHeader>
+					<CardTitle>Devices</CardTitle>
+				</CardHeader>
+				<CardContent>
+					{sortedDevices.length > 0 ? (
+						<div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
+							{sortedDevices.map((device) => {
+								const orientation = device.screen_orientation || "landscape";
+								const deviceWidth =
+									orientation === "landscape"
+										? device.screen_width || DEFAULT_IMAGE_WIDTH
+										: device.screen_height || DEFAULT_IMAGE_HEIGHT;
+								const deviceHeight =
+									orientation === "landscape"
+										? device.screen_height || DEFAULT_IMAGE_HEIGHT
+										: device.screen_width || DEFAULT_IMAGE_WIDTH;
+								const grayscaleLevels = getGrayscaleLevels(device.grayscale);
+								const previewSrc = getDevicePreviewSrc(
+									device,
+									playlistItems,
+									deviceWidth,
+									deviceHeight,
+									grayscaleLevels,
+								);
+								const refreshPerDay = calculateRefreshPerDay(device);
+								const batteryEstimate = device.battery_voltage
+									? estimateBatteryLife(device.battery_voltage, refreshPerDay)
+									: null;
+								const batteryColorClass = batteryEstimate
+									? getBatteryColorClass(batteryEstimate.batteryPercentage)
+									: "bg-muted";
+								const batteryWidth = batteryEstimate
+									? batteryEstimate.batteryPercentage === 0
+										? 0
+										: Math.max(6, batteryEstimate.batteryPercentage)
+									: 0;
+
+								return (
 									<div
-										className="space-y-2 max-h-[100px] overflow-y-auto"
-										style={{ scrollbarWidth: "thin" }}
+										key={device.id}
+										className="rounded-xl border bg-card overflow-hidden"
 									>
-										{onlineDevices.length > 0 ? (
-											onlineDevices.map((device) => (
-												<div
-													key={device.id}
-													className="flex items-center justify-between p-2 bg-muted/50 rounded-md"
-												>
-													<div className="flex items-center gap-2">
-														<StatusIndicator status="online" size="md" />
-														<Link
-															href={`/device/${device.friendly_id}`}
-															className="text-sm"
-														>
-															{device.name}
-														</Link>
-													</div>
-													<span
-														className="text-xs text-muted-foreground"
-														suppressHydrationWarning
+										<div className="border-b px-4 py-3">
+											<div className="flex items-start justify-between gap-3">
+												<div className="min-w-0">
+													<Link
+														href={`/device/${device.friendly_id}`}
+														className="font-medium hover:underline"
 													>
-														{formatDate(device.last_update_time)}
+														{device.name}
+													</Link>
+													<div className="text-xs text-muted-foreground mt-1">
+														{device.friendly_id} · Last update{" "}
+														<span suppressHydrationWarning>
+															{formatDate(device.last_update_time)}
+														</span>
+													</div>
+												</div>
+												<div className="flex items-center gap-2 rounded-full border px-2.5 py-1">
+													<StatusIndicator
+														status={device.status}
+														size="md"
+													/>
+													<span className="text-xs font-medium capitalize">
+														{device.status}
 													</span>
 												</div>
-											))
-										) : (
-											<div className="text-muted-foreground text-sm">
-												No devices are online
 											</div>
-										)}
-									</div>
-								</div>
-								<div>
-									<h3 className="text-sm font-medium mb-2">Offline Devices</h3>
-									<div
-										className="space-y-2 max-h-[100px] overflow-y-auto"
-										style={{ scrollbarWidth: "thin" }}
-									>
-										{offlineDevices.length > 0 ? (
-											offlineDevices.map((device) => (
-												<div
-													key={device.id}
-													className="flex items-center justify-between p-2 bg-muted/50 rounded-md"
-												>
-													<div className="flex items-center gap-2">
-														<StatusIndicator status="offline" size="md" />
-														<Link
-															href={`/device/${device.friendly_id}`}
-															className="text-sm"
-														>
-															{device.name}
-														</Link>
-													</div>
-													<span
-														className="text-xs text-muted-foreground"
-														suppressHydrationWarning
-													>
-														{formatDate(device.last_update_time)}
+										</div>
+										<div className="p-4 space-y-4">
+											<div className="space-y-2">
+												<div className="flex items-center justify-between text-xs text-muted-foreground">
+													<span>Latest screen</span>
+													<span>
+														{deviceWidth}x{deviceHeight}
 													</span>
 												</div>
-											))
-										) : (
-											<div className="text-muted-foreground text-sm">
-												No devices are offline
+												<div className="rounded-lg border bg-muted overflow-hidden">
+													<AspectRatio ratio={deviceWidth / deviceHeight}>
+														<Image
+															src={previewSrc}
+															alt={`${device.name} latest screen`}
+															fill
+															className="object-contain"
+															style={{ imageRendering: "pixelated" }}
+															unoptimized
+														/>
+													</AspectRatio>
+												</div>
 											</div>
-										)}
+											<div className="rounded-lg border bg-muted/30 p-3">
+												<div className="flex items-center justify-between gap-3 text-sm">
+													<span className="text-muted-foreground">Battery</span>
+													<span className="font-medium">
+														{batteryEstimate
+															? batteryEstimate.isCharging
+																? "Charging"
+																: `${Math.round(batteryEstimate.batteryPercentage)}%`
+															: "Unknown"}
+													</span>
+												</div>
+												<div className="mt-3 h-2 overflow-hidden rounded-full bg-muted">
+													<div
+														className={`h-full rounded-full transition-all ${batteryColorClass}`}
+														style={{
+															width: `${batteryWidth}%`,
+														}}
+													/>
+												</div>
+												<div className="mt-3 text-xs text-muted-foreground">
+													{device.battery_voltage ? (
+														batteryEstimate?.isCharging ? (
+															`${device.battery_voltage}V reported`
+														) : (
+															`${device.battery_voltage}V · ${formatBatteryTimeLeft(
+																batteryEstimate?.remainingDays || 0,
+															)}`
+														)
+													) : (
+														"Battery data unavailable"
+													)}
+												</div>
+												<div className="mt-1 text-xs text-muted-foreground">
+													{device.battery_voltage
+														? `${Math.round(refreshPerDay)} refreshes/day estimate`
+														: "Waiting for battery telemetry from the device"}
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				</div>
-			</div>
+								);
+							})}
+						</div>
+					) : (
+						<div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
+							No devices available yet.
+						</div>
+					)}
+				</CardContent>
+			</Card>
 
 			<Card className="mt-2 md:mt-4 gap-4 transition-shadow hover:shadow-md hover:border-border/80">
 				<CardHeader>

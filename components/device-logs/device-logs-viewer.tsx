@@ -44,7 +44,6 @@ export default function DeviceLogsViewer({
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const scrollRef = useRef<HTMLDivElement>(null);
 	const searchInputRef = useRef<HTMLInputElement>(null);
 
 	// Get URL params with defaults
@@ -153,13 +152,6 @@ export default function DeviceLogsViewer({
 		loadLogs();
 	}, [page, searchQuery, typeFilter, friendlyId]);
 
-	// Maintain scroll position
-	useEffect(() => {
-		if (scrollRef.current && !isLoading) {
-			scrollRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-		}
-	}, [isLoading]);
-
 	// Calculate pagination values
 	const totalPages = Math.ceil(totalLogs / ITEMS_PER_PAGE);
 	const showingFrom = (page - 1) * ITEMS_PER_PAGE + 1;
@@ -197,7 +189,7 @@ export default function DeviceLogsViewer({
 	};
 
 	return (
-		<div ref={scrollRef} className="space-y-4">
+		<div className="space-y-4">
 			{/* Search and filters */}
 			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 				<div className="relative flex-1">
