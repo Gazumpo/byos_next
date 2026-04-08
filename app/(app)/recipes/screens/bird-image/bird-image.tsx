@@ -70,7 +70,7 @@ export default async function BirdImage({
 			<div className="flex h-full w-full flex-col bg-white p-4 text-black">
 				<div className="flex items-end justify-between border-b-2 border-black pb-2">
 					<div className="flex flex-col">
-						<div className="text-2xl">{detectedAt}</div>
+						<div className="text-4xl">{detectedAt}</div>
 					</div>
 					<div className="text-right">
 						<div className="text-2xl font-semibold">{displayName}</div>
@@ -79,7 +79,7 @@ export default async function BirdImage({
 
 				<div className="flex min-h-0 flex-1 py-4">
 					{showImage ? (
-						<div className="flex h-full w-full items-center justify-center overflow-hidden bg-neutral-100">
+						<div className="flex h-full w-full items-center justify-center overflow-hidden">
 							<img
 								src={imageSrc || ""}
 								alt={displayName}
