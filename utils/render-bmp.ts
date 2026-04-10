@@ -299,7 +299,7 @@ export async function renderBmp(png: Buffer, options: RenderBmpOptions = {}) {
 			// Edge detection for pixels not on the border
 			if (y > 0 && y < targetHeight - 1 && x > 0 && x < targetWidth - 1) {
 				// Check if this pixel has high contrast with neighbors
-				const fuzziness = 5;
+				const fuzziness = 11;
 				const hasExtreme =
 					gray < fuzziness ||
 					gray > 255 - fuzziness ||
