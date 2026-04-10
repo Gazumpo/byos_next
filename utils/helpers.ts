@@ -220,7 +220,8 @@ export const formatTimezone = (timezone: string): string => {
 export function calculateRefreshPerDay(device: Device): number {
 	if (!device.refresh_schedule) return 0;
 
-	const defaultRefreshRate = device.refresh_schedule.default_refresh_rate || 300;
+	const defaultRefreshRate =
+		device.refresh_schedule.default_refresh_rate || 300;
 	let refreshesPerDay = (24 * 60 * 60) / defaultRefreshRate;
 
 	for (const range of device.refresh_schedule.time_ranges || []) {

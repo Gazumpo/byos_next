@@ -55,6 +55,7 @@ export default async function BirdImage({
 	latestBird,
 	imageSrc,
 	imageCandidates = [],
+	funFact,
 	width = 800,
 	height = 480,
 }: BirdImageProps) {
@@ -86,17 +87,26 @@ export default async function BirdImage({
 										objectFit: "contain",
 									}}
 								/>
-								<div className="mt-1 flex w-full justify-center">
+								<div className="mt-1 flex w-full flex-col items-center justify-center text-center">
 									<div className="text-2xl font-semibold">{displayName}</div>
+									{funFact && (
+										<div className="mt-4 max-w-[90%] text-lg leading-tight">
+											{funFact}
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
 					) : (
 						<div className="flex h-full w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-black px-10 text-center">
 							<div className="text-4xl font-semibold">{displayName}</div>
-							<div className="mt-3 text-2xl">
-								Add an image named with the scientific name in the recipe&apos;s
-								{" "}`images` folder.
+							{funFact && (
+								<div className="mt-4 max-w-[80%] text-2xl">
+									{funFact}
+								</div>
+							)}
+							<div className="mt-6 text-2xl">
+								No image found.
 							</div>
 							{imageCandidates.length > 0 ? (
 								<div className="mt-4 text-xl">

@@ -135,10 +135,7 @@ const getDevicePreviewSrc = (
 	height: number,
 	grayscale: number,
 ): string => {
-	if (
-		device.display_mode === DeviceDisplayMode.MIXUP &&
-		device.mixup_id
-	) {
+	if (device.display_mode === DeviceDisplayMode.MIXUP && device.mixup_id) {
 		return `/api/bitmap/mixup/${device.mixup_id}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
 	}
 
@@ -273,10 +270,7 @@ export const DashboardContent = ({
 													</div>
 												</div>
 												<div className="flex items-center gap-2 rounded-full border px-2.5 py-1">
-													<StatusIndicator
-														status={device.status}
-														size="md"
-													/>
+													<StatusIndicator status={device.status} size="md" />
 													<span className="text-xs font-medium capitalize">
 														{device.status}
 													</span>
@@ -324,17 +318,13 @@ export const DashboardContent = ({
 													/>
 												</div>
 												<div className="mt-3 text-xs text-muted-foreground">
-													{device.battery_voltage ? (
-														batteryEstimate?.isCharging ? (
-															`${device.battery_voltage}V reported`
-														) : (
-															`${device.battery_voltage}V · ${formatBatteryTimeLeft(
-																batteryEstimate?.remainingDays || 0,
-															)}`
-														)
-													) : (
-														"Battery data unavailable"
-													)}
+													{device.battery_voltage
+														? batteryEstimate?.isCharging
+															? `${device.battery_voltage}V reported`
+															: `${device.battery_voltage}V · ${formatBatteryTimeLeft(
+																	batteryEstimate?.remainingDays || 0,
+																)}`
+														: "Battery data unavailable"}
 												</div>
 												<div className="mt-1 text-xs text-muted-foreground">
 													{device.battery_voltage

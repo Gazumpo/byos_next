@@ -105,8 +105,7 @@ export function AppSidebar({
 									<Badge
 										variant="secondary"
 										className="w-fit text-[10px] px-1 py-0"
-									>
-									</Badge>
+									></Badge>
 								</div>
 							</Link>
 						</SidebarMenuButton>

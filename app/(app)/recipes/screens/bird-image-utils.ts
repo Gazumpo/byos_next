@@ -42,9 +42,7 @@ export const buildImageCandidates = (scientificName?: string) => {
 	if (!scientificStem) return [];
 
 	const normalizedStem = normalizeBirdName(scientificName);
-	return Array.from(
-		new Set([scientificStem, normalizedStem].filter(Boolean)),
-	);
+	return Array.from(new Set([scientificStem, normalizedStem].filter(Boolean)));
 };
 
 const readBirdImageDirectory = async (

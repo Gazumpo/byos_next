@@ -4,6 +4,7 @@ import {
 	buildImageCandidates,
 	findBirdImageForCandidates,
 } from "../bird-image-utils";
+import { generateJSON } from "@/lib/ai/gemini";
 import type { BirdRecord } from "../birds/getData";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,7 @@ export interface BirdImageData {
 	imageSrc: string | null;
 	imageFileName: string | null;
 	imageCandidates: string[];
+	funFact: string | null;
 }
 
 const BIRD_API: string =
@@ -113,6 +115,31 @@ const getCachedLatestBird = unstable_cache(
 	{ tags: ["birds", "bird-image"], revalidate: 60 },
 );
 
+async function fetchBirdFunFactNoCache(
+	sciName: string,
+	comName: string,
+): Promise<string | null> {
+	try {
+		const prompt = `Give me a fact or interesting information about the bird with scientific name ${sciName} (commonly known as ${comName}). Return it in JSON format with the keys 'common_name', 'scientific_name', and 'fun_fact'. Keep the fact under 150 characters. Do not include markdown formatting, just the raw JSON.`;
+
+		const result = await generateJSON<{ fun_fact: string }>(prompt);
+		return result?.fun_fact || null;
+	} catch (error) {
+		console.error("[BirdImage AI] Error:", error);
+		return null;
+	}
+}
+
+const getCachedBirdFunFact = unstable_cache(
+	async (sciName: string, comName: string): Promise<string | null> => {
+		const fact = await fetchBirdFunFactNoCache(sciName, comName);
+		if (!fact) throw new Error("Fact is null, skip caching");
+		return fact;
+	},
+	["bird-image-fun-fact"],
+	{ tags: ["birds", "bird-image-fun-fact"], revalidate: 60 * 60 * 24 }, // Cache for 24 hours
+);
+
 export default async function getData(): Promise<BirdImageData> {
 	try {
 		const latestBird = await getCachedLatestBird();
@@ -122,11 +149,20 @@ export default async function getData(): Promise<BirdImageData> {
 			IMAGE_DIRECTORY,
 		);
 
+		let funFact: string | null = null;
+		if (latestBird?.Sci_Name) {
+			funFact = await getCachedBirdFunFact(
+				latestBird.Sci_Name,
+				latestBird.Com_Name,
+			);
+		}
+
 		return {
 			latestBird,
 			imageSrc,
 			imageFileName,
 			imageCandidates,
+			funFact,
 		};
 	} catch (error) {
 		console.log("Cache skipped for bird-image, fallback:", error);
@@ -137,11 +173,20 @@ export default async function getData(): Promise<BirdImageData> {
 			IMAGE_DIRECTORY,
 		);
 
+		let funFact: string | null = null;
+		if (latestBird?.Sci_Name) {
+			funFact = await fetchBirdFunFactNoCache(
+				latestBird.Sci_Name,
+				latestBird.Com_Name,
+			);
+		}
+
 		return {
 			latestBird,
 			imageSrc,
 			imageFileName,
 			imageCandidates,
+			funFact,
 		};
 	}
 }
