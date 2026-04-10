@@ -68,26 +68,28 @@ export default async function BirdImage({
 	return (
 		<PreSatori width={width} height={height}>
 			<div className="flex h-full w-full flex-col bg-white p-4 text-black">
-				<div className="flex items-end justify-between border-b-2 border-black pb-2">
-					<div className="flex flex-col">
-						<div className="text-4xl">{detectedAt}</div>
-					</div>
-					<div className="text-right">
-						<div className="text-2xl font-semibold">{displayName}</div>
-					</div>
-				</div>
-
-				<div className="flex min-h-0 flex-1 py-4">
+				<div className="flex min-h-0 flex-1 flex-col py-4">
 					{showImage ? (
 						<div className="flex h-full w-full items-center justify-center overflow-hidden">
-							<img
-								src={imageSrc || ""}
-								alt={displayName}
-								width={width - 32}
-								height={height - 140}
-								className="h-full w-full object-contain"
-								style={{ filter: "invert(1)" }}
-							/>
+							<div className="flex max-h-full max-w-full flex-col items-center">
+								<div className="mb-2 text-4xl">{detectedAt}</div>
+								<img
+									src={imageSrc || ""}
+									alt={displayName}
+									width={width - 32}
+									height={height - 140}
+									className="block"
+									style={{
+										filter: "invert(1)",
+										maxWidth: "100%",
+										maxHeight: `${height - 170}px`,
+										objectFit: "contain",
+									}}
+								/>
+								<div className="mt-1 flex w-full justify-center">
+									<div className="text-2xl font-semibold">{displayName}</div>
+								</div>
+							</div>
 						</div>
 					) : (
 						<div className="flex h-full w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-black px-10 text-center">
