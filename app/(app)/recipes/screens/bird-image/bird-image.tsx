@@ -68,29 +68,29 @@ export default async function BirdImage({
 
 	return (
 		<PreSatori width={width} height={height}>
-			<div className="flex h-full w-full flex-col bg-white p-4 text-black">
-				<div className="flex min-h-0 flex-1 flex-col py-4">
+			<div className="flex h-full w-full flex-col bg-white p-2 text-black">
+				<div className="flex min-h-0 flex-1 flex-col">
 					{showImage ? (
 						<div className="flex h-full w-full items-center justify-center overflow-hidden">
 							<div className="flex max-h-full max-w-full flex-col items-center">
-								<div className="mb-2 text-4xl">{detectedAt}</div>
+								<div className="text-4xl">{detectedAt}</div>
 								<img
 									src={imageSrc || ""}
 									alt={displayName}
 									width={width - 32}
-									height={height - 140}
+									height={height - 200}
 									className="block"
 									style={{
 										filter: "invert(1)",
 										maxWidth: "100%",
-										maxHeight: `${height - 170}px`,
+										maxHeight: `${height - 210}px`,
 										objectFit: "contain",
 									}}
 								/>
 								<div className="mt-1 flex w-full flex-col items-center justify-center text-center">
 									<div className="text-2xl font-semibold">{displayName}</div>
 									{funFact && (
-										<div className="mt-4 max-w-[90%] text-lg leading-tight">
+										<div className="mt-4 max-w-[90%] text-xl leading-tight">
 											{funFact}
 										</div>
 									)}
@@ -98,19 +98,17 @@ export default async function BirdImage({
 							</div>
 						</div>
 					) : (
-						<div className="flex h-full w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-black px-10 text-center">
+						<div className="flex h-full w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-black px-10 py-4 text-center">
 							<div className="text-4xl font-semibold">{displayName}</div>
 							{funFact && (
-								<div className="mt-4 max-w-[80%] text-2xl">
-									{funFact}
-								</div>
+								<div className="mt-4 max-w-[90%] text-2xl">{funFact}</div>
 							)}
 							<div className="mt-6 text-2xl">
 								No image found.
 							</div>
 							{imageCandidates.length > 0 ? (
 								<div className="mt-4 text-xl">
-									Try naming it {imageCandidates[0]}.
+									Try {imageCandidates[0]}.
 								</div>
 							) : null}
 						</div>
