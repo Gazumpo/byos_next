@@ -6,8 +6,8 @@ export interface GraphDataPoint {
 }
 
 export interface GraphProps {
-	/** Array of data points to plot */
-	data: GraphDataPoint[];
+	/** Array of data points to plot, or an array of arrays for multiple lines */
+	data: GraphDataPoint[] | GraphDataPoint[][];
 	/** Width of the graph in pixels */
 	width?: number;
 	/** Height of the graph in pixels */
@@ -22,8 +22,8 @@ export interface GraphProps {
 	yAxisFormat?: (value: number) => string;
 	/** Format function for X axis values */
 	xAxisFormat?: (value: number | Date) => string;
-	/** Line color (uses currentColor if not specified) */
-	lineColor?: string;
+	/** Line color or array of colors for multiple lines */
+	lineColor?: string | string[];
 	/** Line width in pixels */
 	lineWidth?: number;
 	/** Whether to show grid lines */
@@ -38,6 +38,8 @@ export interface GraphProps {
 	isTimeData?: boolean;
 	/** Type of curve interpolation to use */
 	curveType?: "natural" | "monotone" | "step" | "linear";
+	/** Custom font size for labels */
+	fontSize?: number;
 }
 
 export function Graph({
@@ -50,9 +52,10 @@ export function Graph({
 	yAxisFormat = (value: number) => d3.format(",.0f")(value),
 	xAxisFormat = (value: number | Date) =>
 		value instanceof Date
-			? value.toLocaleTimeString("en-US", {
+			? value.toLocaleTimeString("en-GB", {
 					hour: "2-digit",
 					minute: "2-digit",
+					hour12: false,
 				})
 			: value.toString(),
 	lineColor = "currentColor",
@@ -65,28 +68,43 @@ export function Graph({
 	},
 	isTimeData = false,
 	curveType = "natural",
+	fontSize: customFontSize,
 }: GraphProps) {
 	const innerWidth = width - margin.left - margin.right;
 	const innerHeight = height - margin.top - margin.bottom;
 
-	const fontSize = Math.round((50 * Math.max(innerWidth, innerHeight)) / 800);
+	const fontSize =
+		customFontSize ||
+		Math.round((24 * Math.max(innerWidth, innerHeight)) / 800);
+
+	// Normalize data to GraphDataPoint[][]
+	const datasets = Array.isArray(data[0])
+		? (data as GraphDataPoint[][])
+		: ([data] as GraphDataPoint[][]);
+
+	// Flatten all points to calculate domains
+	const allPoints = datasets.flat();
+
+	if (allPoints.length === 0) {
+		return <div style={{ width, height }}>No data</div>;
+	}
 
 	// Create scales
 	const xScale = isTimeData
 		? d3
 				.scaleTime()
-				.domain(d3.extent(data, (d) => d.x as Date) as [Date, Date])
+				.domain(d3.extent(allPoints, (d) => d.x as Date) as [Date, Date])
 				.range([0, innerWidth])
 		: d3
 				.scaleLinear()
-				.domain(d3.extent(data, (d) => d.x as number) as [number, number])
+				.domain(d3.extent(allPoints, (d) => d.x as number) as [number, number])
 				.range([0, innerWidth]);
 
 	const yScale = d3
 		.scaleLinear()
 		.domain([
-			(d3.min(data, (d) => d.y) as number) * 0.99,
-			(d3.max(data, (d) => d.y) as number) * 1.01,
+			(d3.min(allPoints, (d) => d.y) as number) * 0.99,
+			(d3.max(allPoints, (d) => d.y) as number) * 1.01,
 		])
 		.range([innerHeight, 0]);
 
@@ -154,6 +172,21 @@ export function Graph({
     `;
 	};
 
+	// Generate paths for each dataset
+	const paths = datasets
+		.map((dataset, i) => {
+			const color = Array.isArray(lineColor)
+				? lineColor[i % lineColor.length]
+				: lineColor;
+			return `<path
+        fill="none"
+        stroke="${color}"
+        stroke-width="${lineWidth}"
+        d="${line(dataset)}"
+      />`;
+		})
+		.join("");
+
 	// Generate SVG string
 	const svgString = `
     <svg 
@@ -164,12 +197,7 @@ export function Graph({
       xmlns="http://www.w3.org/2000/svg"
     >
       ${showGrid ? generateGridLines() : ""}
-      <path
-        fill="none"
-        stroke="${lineColor}"
-        stroke-width="${lineWidth}"
-        d="${line(data)}"
-      />
+      ${paths}
     </svg>
   `.trim();
 
@@ -248,6 +276,7 @@ export function Graph({
 						position: "relative",
 						height: "30px",
 						width: innerWidth,
+						overflow: "visible",
 					}}
 				>
 					{xAxisTicks.map((tick) => {

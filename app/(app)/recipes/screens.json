@@ -327,5 +327,66 @@
 		"renderSettings": {},
 		"version": "0.1.0",
 		"category": "display-components"
+	},
+	"temperatures": {
+		"title": "Temperature History",
+		"published": true,
+		"createdAt": "2026-04-14T00:00:00Z",
+		"updatedAt": "2026-04-14T00:00:00Z",
+		"description": "Displays temperature history for multiple sensors from Home Assistant.",
+		"componentPath": "./screens/temperatures",
+		"hasDataFetch": true,
+		"props": {
+			"livingRoom": [],
+			"bedroom": [],
+			"outside": []
+		},
+		"params": {
+			"haUrl": {
+				"type": "string",
+				"label": "Home Assistant URL",
+				"description": "The URL of your Home Assistant instance (e.g., http://homeassistant.local:8123)",
+				"default": "",
+				"placeholder": "http://homeassistant.local:8123"
+			},
+			"haToken": {
+				"type": "string",
+				"label": "HA Access Token",
+				"description": "Long-lived access token from Home Assistant",
+				"default": "",
+				"placeholder": "ey..."
+			},
+			"livingRoomEntity": {
+				"type": "string",
+				"label": "Living Room Entity ID",
+				"description": "Entity ID for the living room temperature sensor",
+				"default": "sensor.living_room_temperature",
+				"placeholder": "sensor.living_room_temperature"
+			},
+			"bedroomEntity": {
+				"type": "string",
+				"label": "Bedroom Entity ID",
+				"description": "Entity ID for the bedroom temperature sensor",
+				"default": "sensor.bedroom_temperature",
+				"placeholder": "sensor.bedroom_temperature"
+			},
+			"outsideEntity": {
+				"type": "string",
+				"label": "Outside Entity ID",
+				"description": "Entity ID for the outside temperature sensor",
+				"default": "sensor.outside_temperature",
+				"placeholder": "sensor.outside_temperature"
+			}
+		},
+		"tags": ["home-assistant", "temperature", "chart", "api"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.1.0",
+		"category": "display-components"
 	}
 }

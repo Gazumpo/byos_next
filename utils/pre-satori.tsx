@@ -28,6 +28,21 @@ export const PreSatori: React.FC<PreSatoriProps> = ({
 	// Define a helper to recursively transform children.
 	const transform = (child: React.ReactNode): React.ReactNode => {
 		if (React.isValidElement(child)) {
+			// If it's a Fragment, we cannot clone it with props (like style or tw)
+			if (child.type === React.Fragment) {
+				const { children: fragmentChildren } = child.props as {
+					children?: React.ReactNode;
+				};
+				if (fragmentChildren) {
+					return React.cloneElement(
+						child,
+						undefined,
+						React.Children.map(fragmentChildren, (c) => transform(c)),
+					);
+				}
+				return child;
+			}
+
 			const {
 				className,
 				style,

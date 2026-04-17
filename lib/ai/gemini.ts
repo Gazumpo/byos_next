@@ -67,13 +67,21 @@ export async function generateJSON<T>(
 
 	// Clean up markdown backticks if present
 	if (text.includes("```")) {
-		text = text.replace(/```json\s?/, "").replace(/```\s?/, "").trim();
+		text = text
+			.replace(/```json\s?/, "")
+			.replace(/```\s?/, "")
+			.trim();
 	}
 
 	try {
 		return JSON.parse(text) as T;
 	} catch (parseError) {
-		console.error("[Gemini AI] JSON Parse Error:", parseError, "Original text:", text);
+		console.error(
+			"[Gemini AI] JSON Parse Error:",
+			parseError,
+			"Original text:",
+			text,
+		);
 		return null;
 	}
 }
