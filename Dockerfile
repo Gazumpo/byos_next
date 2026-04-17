@@ -27,6 +27,11 @@ RUN rm -rf ~/.npm ~/.pnpm-store
 # Build the application
 FROM base AS builder
 
+ENV NODE_OPTIONS="--max-old-space-size=1024"
+ENV NEXT_CPU_LIMIT=1
+ENV NEXT_USE_TURBOPACK=0
+ENV GENERATE_SOURCEMAP=false
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 

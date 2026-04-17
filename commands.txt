@@ -10,8 +10,6 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 Then stop the background run with:
 docker compose -f docker-compose.yml -f docker-compose.dev.yml down
 
-
-
 ssh graeme@birdnet.local
 scp -r /Users/graeme/Projects/BYOS_next/docker-compose.yml graeme@birdnet.local:/home/graeme/byos_next/docker-compose.yml
 
@@ -20,8 +18,18 @@ scp -r "/Users/graeme/Projects/byos_next/components/" "graeme@birdnet.local:/hom
 scp -r "/Users/graeme/Projects/byos_next/utils/" "graeme@birdnet.local:/home/graeme/byos_next/"
 scp -r "/Users/graeme/Projects/byos_next/app/(app)/recipes/screens/" "graeme@birdnet.local:/home/graeme/byos_next/app/(app)/recipes/"
 scp -r "/Users/graeme/Projects/byos_next/lib" "graeme@birdnet.local:/home/graeme/byos_next/"
+scp -r "/Users/graeme/Projects/byos_next" "graeme@birdnet.local:/home/graeme/"
+
+scp .env graeme@birdnet.local:/home/graeme/byos_next/.env
+rsync -avP --exclude='node_modules' --exclude='.next' --exclude='.pnpm-store' --exclude='.git' ./ graeme@birdnet.local:/home/graeme/byos_next/
 
 
 to update prod. mostly the second line. 
 sudo docker compose down --rmi local
 sudo docker compose up -d --build
+
+
+
+
+python normalize_image_extremes.py "/Users/graeme/Desktop/birds" --output-dir "/Users/graeme/Projects/BYOS_next/app/(app)/recipes/screens/bird-image/images" --fuzziness 20 --trmnl-size 
+python normalize_image_extremes.py "/Users/graeme/Desktop/bird-marks" --output-dir "/Users/graeme/Projects/BYOS_next/app/(app)/recipes/screens/birds/images" --fuzziness 20 --trmnl-size 

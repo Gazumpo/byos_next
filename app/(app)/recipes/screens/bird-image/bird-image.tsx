@@ -103,13 +103,9 @@ export default async function BirdImage({
 							{funFact && (
 								<div className="mt-4 max-w-[90%] text-2xl">{funFact}</div>
 							)}
-							<div className="mt-6 text-2xl">
-								No image found.
-							</div>
+							<div className="mt-6 text-2xl">No image found.</div>
 							{imageCandidates.length > 0 ? (
-								<div className="mt-4 text-xl">
-									Try {imageCandidates[0]}.
-								</div>
+								<div className="mt-4 text-xl">Try {imageCandidates[0]}.</div>
 							) : null}
 						</div>
 					)}
