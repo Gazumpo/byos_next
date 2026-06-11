@@ -38,6 +38,7 @@ interface DashboardContentProps {
 	devices: Device[];
 	playlistItems: PlaylistItem[];
 	systemLogs: SystemLog[];
+	previewCacheKey: string;
 }
 
 const getGrayscaleLevels = (grayscale: number | null | undefined): number => {
@@ -134,9 +135,12 @@ const getDevicePreviewSrc = (
 	width: number,
 	height: number,
 	grayscale: number,
+	cacheKey: string,
 ): string => {
+	const encodedCacheKey = encodeURIComponent(cacheKey);
+
 	if (device.display_mode === DeviceDisplayMode.MIXUP && device.mixup_id) {
-		return `/api/bitmap/mixup/${device.mixup_id}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
+		return `/api/bitmap/mixup/${device.mixup_id}.bmp?width=${width}&height=${height}&grayscale=${grayscale}&v=${encodedCacheKey}`;
 	}
 
 	const screenToDisplay =
@@ -144,7 +148,7 @@ const getDevicePreviewSrc = (
 			? getPlaylistPreviewScreen(device, playlistItems)
 			: device.screen;
 
-	return `/api/bitmap/${screenToDisplay || "not-found"}.bmp?width=${width}&height=${height}&grayscale=${grayscale}`;
+	return `/api/bitmap/${screenToDisplay || "not-found"}.bmp?width=${width}&height=${height}&grayscale=${grayscale}&v=${encodedCacheKey}`;
 };
 
 const getBatteryColorClass = (batteryPercentage: number): string => {
@@ -175,6 +179,7 @@ export const DashboardContent = ({
 	devices,
 	playlistItems,
 	systemLogs,
+	previewCacheKey,
 }: DashboardContentProps) => {
 	// Process devices data
 	const processedDevices = devices.map((device) => ({
@@ -228,12 +233,21 @@ export const DashboardContent = ({
 										? device.screen_height || DEFAULT_IMAGE_HEIGHT
 										: device.screen_width || DEFAULT_IMAGE_WIDTH;
 								const grayscaleLevels = getGrayscaleLevels(device.grayscale);
+								const devicePreviewCacheKey = [
+									previewCacheKey,
+									device.updated_at,
+									device.last_update_time,
+									device.current_playlist_index,
+								]
+									.filter(Boolean)
+									.join("-");
 								const previewSrc = getDevicePreviewSrc(
 									device,
 									playlistItems,
 									deviceWidth,
 									deviceHeight,
 									grayscaleLevels,
+									devicePreviewCacheKey,
 								);
 								const refreshPerDay = calculateRefreshPerDay(device);
 								const batteryEstimate = device.battery_voltage

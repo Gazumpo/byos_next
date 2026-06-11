@@ -68,6 +68,8 @@ const getCachedBirds = unstable_cache(
 		const data = await fetchBirdsNoCache();
 		if (!data || !Array.isArray(data.items))
 			throw new Error("Empty or invalid data - skip caching");
+		if (data.items.length === 0)
+			throw new Error("No bird detections returned - skip caching");
 		return data;
 	},
 	["birds-data"],

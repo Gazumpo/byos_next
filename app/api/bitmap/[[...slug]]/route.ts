@@ -11,6 +11,14 @@ import {
 	renderRecipeOutputs,
 } from "@/lib/recipes/recipe-renderer";
 
+const bitmapHeaders = (contentLength: number) => ({
+	"Content-Type": "image/bmp",
+	"Content-Length": contentLength.toString(),
+	"Cache-Control": "no-store, no-cache, must-revalidate",
+	Pragma: "no-cache",
+	Expires: "0",
+});
+
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: Promise<{ slug?: string[] }> },
@@ -65,10 +73,7 @@ export async function GET(
 		}
 
 		return new Response(new Uint8Array(recipeBuffer), {
-			headers: {
-				"Content-Type": "image/bmp",
-				"Content-Length": recipeBuffer.length.toString(),
-			},
+			headers: bitmapHeaders(recipeBuffer.length),
 		});
 	} catch (error) {
 		logger.error("Error generating image:", error);
@@ -130,10 +135,7 @@ const renderFallbackBitmap = cache(async (slug: string = "not-found") => {
 		}
 
 		return new Response(new Uint8Array(renders.bitmap), {
-			headers: {
-				"Content-Type": "image/bmp",
-				"Content-Length": renders.bitmap.length.toString(),
-			},
+			headers: bitmapHeaders(renders.bitmap.length),
 		});
 	} catch (fallbackError) {
 		logger.error("Error generating fallback image:", fallbackError);

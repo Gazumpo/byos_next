@@ -1,5 +1,3 @@
-import { unstable_cache } from "next/cache";
-
 export const dynamic = "force-dynamic";
 
 interface TemperaturePoint {
@@ -7,11 +5,18 @@ interface TemperaturePoint {
 	y: number;
 }
 
+interface HAEntry {
+	state: string;
+	last_changed?: string;
+	last_updated?: string;
+}
+
 interface TemperatureData {
 	livingRoom: TemperaturePoint[];
 	bedroom: TemperaturePoint[];
 	outside: TemperaturePoint[];
 	lastUpdated: string;
+	historyHours: number;
 	error?: string;
 }
 
@@ -21,6 +26,7 @@ interface HAParams {
 	livingRoomEntity?: string;
 	bedroomEntity?: string;
 	outsideEntity?: string;
+	historyHours?: number;
 }
 
 async function fetchHAState(
@@ -60,9 +66,10 @@ async function fetchHAHistory(
 	token: string,
 	entityId: string,
 	startTime: string,
+	endTime: string,
 ): Promise<TemperaturePoint[]> {
 	// Removing minimal_response for better consistency with latest state
-	const endpoint = `${url}/api/history/period/${startTime}?filter_entity_id=${entityId}&no_attributes`;
+	const endpoint = `${url}/api/history/period/${startTime}?filter_entity_id=${entityId}&no_attributes&end_time=${endTime}`;
 
 	const [historyResponse, currentState] = await Promise.all([
 		fetch(endpoint, {
@@ -85,13 +92,13 @@ async function fetchHAHistory(
 	let history: TemperaturePoint[] = [];
 
 	if (Array.isArray(data) && data.length > 0) {
-		const entries = data[0];
+		const entries = data[0] as HAEntry[];
 		history = entries
-			.map((entry: any) => ({
-				x: new Date(entry.last_changed || entry.last_updated),
+			.map((entry: HAEntry) => ({
+				x: new Date(entry.last_changed || entry.last_updated || new Date()),
 				y: Number.parseFloat(entry.state),
 			}))
-			.filter((point: any) => !Number.isNaN(point.y));
+			.filter((point: TemperaturePoint) => !Number.isNaN(point.y));
 	}
 
 	// Append current state if it's newer than the last history point
@@ -111,6 +118,7 @@ async function fetchHAHistory(
 async function getTemperatures(params: HAParams): Promise<TemperatureData> {
 	const haUrl = params.haUrl || process.env.HA_URL;
 	const haToken = params.haToken || process.env.HA_TOKEN;
+	const historyHours = params.historyHours || 24;
 	const livingRoomEntity =
 		params.livingRoomEntity || "sensor.living_room_temperature";
 	const bedroomEntity = params.bedroomEntity || "sensor.bedroom_temperature";
@@ -122,20 +130,22 @@ async function getTemperatures(params: HAParams): Promise<TemperatureData> {
 			bedroom: [],
 			outside: [],
 			lastUpdated: new Date().toISOString(),
+			historyHours,
 			error: "Home Assistant URL or Token not provided.",
 		};
 	}
 
-	// Start of today in ISO format
-	const startOfToday = new Date();
-	startOfToday.setHours(0, 0, 0, 0);
-	const startTime = startOfToday.toISOString();
+	// Calculate start and end time based on historyHours
+	const now = new Date();
+	const startTimeDate = new Date(now.getTime() - historyHours * 60 * 60 * 1000);
+	const startTime = startTimeDate.toISOString();
+	const endTime = now.toISOString();
 
 	try {
 		const [livingRoom, bedroom, outside] = await Promise.all([
-			fetchHAHistory(haUrl, haToken, livingRoomEntity, startTime),
-			fetchHAHistory(haUrl, haToken, bedroomEntity, startTime),
-			fetchHAHistory(haUrl, haToken, outsideEntity, startTime),
+			fetchHAHistory(haUrl, haToken, livingRoomEntity, startTime, endTime),
+			fetchHAHistory(haUrl, haToken, bedroomEntity, startTime, endTime),
+			fetchHAHistory(haUrl, haToken, outsideEntity, startTime, endTime),
 		]);
 
 		return {
@@ -143,15 +153,17 @@ async function getTemperatures(params: HAParams): Promise<TemperatureData> {
 			bedroom,
 			outside,
 			lastUpdated: new Date().toISOString(),
+			historyHours,
 		};
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Error fetching HA temperatures:", error);
 		return {
 			livingRoom: [],
 			bedroom: [],
 			outside: [],
 			lastUpdated: new Date().toISOString(),
-			error: error.message,
+			historyHours,
+			error: error instanceof Error ? error.message : "Unknown error",
 		};
 	}
 }

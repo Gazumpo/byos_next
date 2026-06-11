@@ -376,6 +376,13 @@
 				"description": "Entity ID for the outside temperature sensor",
 				"default": "sensor.outside_temperature",
 				"placeholder": "sensor.outside_temperature"
+			},
+			"historyHours": {
+				"type": "number",
+				"label": "History Hours",
+				"description": "Number of hours of history to show",
+				"default": 24,
+				"placeholder": "24"
 			}
 		},
 		"tags": ["home-assistant", "temperature", "chart", "api"],

@@ -1,10 +1,10 @@
-import { unstable_cache } from "next/cache";
 import path from "node:path";
+import { unstable_cache } from "next/cache";
+import { generateJSON } from "@/lib/ai/gemini";
 import {
 	buildImageCandidates,
 	findBirdImageForCandidates,
 } from "../bird-image-utils";
-import { generateJSON } from "@/lib/ai/gemini";
 import type { BirdRecord } from "../birds/getData";
 
 export const dynamic = "force-dynamic";
@@ -110,7 +110,11 @@ async function fetchLatestBirdNoCache(): Promise<BirdRecord | null> {
 }
 
 const getCachedLatestBird = unstable_cache(
-	async (): Promise<BirdRecord | null> => fetchLatestBirdNoCache(),
+	async (): Promise<BirdRecord | null> => {
+		const latestBird = await fetchLatestBirdNoCache();
+		if (!latestBird) throw new Error("No latest bird returned - skip caching");
+		return latestBird;
+	},
 	["bird-image-latest-bird"],
 	{ tags: ["birds", "bird-image"], revalidate: 60 },
 );

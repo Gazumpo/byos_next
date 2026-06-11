@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { DashboardContent } from "@/components/dashboard/dashboard-content";
 import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton";
 import { DbInitializer } from "@/components/dashboard/db-initializer";
-import { Badge } from "@/components/ui/badge";
 import { getInitData } from "@/lib/getInitData";
 
 const DashboardRuntime = async () => {
@@ -118,13 +117,12 @@ const DashboardRuntime = async () => {
 	}
 
 	return (
-		<>
-			<DashboardContent
-				devices={devices}
-				playlistItems={playlistItems}
-				systemLogs={systemLogs}
-			/>
-		</>
+		<DashboardContent
+			devices={devices}
+			playlistItems={playlistItems}
+			systemLogs={systemLogs}
+			previewCacheKey={Date.now().toString(36)}
+		/>
 	);
 };
 

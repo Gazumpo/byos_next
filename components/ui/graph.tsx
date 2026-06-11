@@ -24,6 +24,8 @@ export interface GraphProps {
 	xAxisFormat?: (value: number | Date) => string;
 	/** Line color or array of colors for multiple lines */
 	lineColor?: string | string[];
+	/** Line dash array or array of dash arrays for multiple lines */
+	lineDash?: string | (string | undefined)[];
 	/** Line width in pixels */
 	lineWidth?: number;
 	/** Whether to show grid lines */
@@ -40,6 +42,10 @@ export interface GraphProps {
 	curveType?: "natural" | "monotone" | "step" | "linear";
 	/** Custom font size for labels */
 	fontSize?: number;
+	/** Custom X domain */
+	xDomain?: [number | Date, number | Date];
+	/** Custom Y domain */
+	yDomain?: [number, number];
 }
 
 export function Graph({
@@ -59,6 +65,7 @@ export function Graph({
 				})
 			: value.toString(),
 	lineColor = "currentColor",
+	lineDash,
 	lineWidth = 3,
 	showGrid = true,
 	gridStyle = {
@@ -69,6 +76,8 @@ export function Graph({
 	isTimeData = false,
 	curveType = "natural",
 	fontSize: customFontSize,
+	xDomain,
+	yDomain,
 }: GraphProps) {
 	const innerWidth = width - margin.left - margin.right;
 	const innerHeight = height - margin.top - margin.bottom;
@@ -93,19 +102,27 @@ export function Graph({
 	const xScale = isTimeData
 		? d3
 				.scaleTime()
-				.domain(d3.extent(allPoints, (d) => d.x as Date) as [Date, Date])
+				.domain(
+					(xDomain as [Date, Date]) ||
+						(d3.extent(allPoints, (d) => d.x as Date) as [Date, Date]),
+				)
 				.range([0, innerWidth])
 		: d3
 				.scaleLinear()
-				.domain(d3.extent(allPoints, (d) => d.x as number) as [number, number])
+				.domain(
+					(xDomain as [number, number]) ||
+						(d3.extent(allPoints, (d) => d.x as number) as [number, number]),
+				)
 				.range([0, innerWidth]);
 
 	const yScale = d3
 		.scaleLinear()
-		.domain([
-			(d3.min(allPoints, (d) => d.y) as number) * 0.99,
-			(d3.max(allPoints, (d) => d.y) as number) * 1.01,
-		])
+		.domain(
+			yDomain || [
+				(d3.min(allPoints, (d) => d.y) as number) * 0.99,
+				(d3.max(allPoints, (d) => d.y) as number) * 1.01,
+			],
+		)
 		.range([innerHeight, 0]);
 
 	// Get curve type
@@ -178,10 +195,16 @@ export function Graph({
 			const color = Array.isArray(lineColor)
 				? lineColor[i % lineColor.length]
 				: lineColor;
+			const dash = Array.isArray(lineDash)
+				? lineDash[i % lineDash.length]
+				: lineDash;
+			const dashAttr = dash ? `stroke-dasharray="${dash}"` : "";
+
 			return `<path
         fill="none"
         stroke="${color}"
         stroke-width="${lineWidth}"
+        ${dashAttr}
         d="${line(dataset)}"
       />`;
 		})

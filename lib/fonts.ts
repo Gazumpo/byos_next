@@ -1,5 +1,4 @@
 import fs from "fs";
-import { Geist_Mono as FontMono, Geist as FontSans } from "next/font/google";
 import localFont from "next/font/local";
 import path from "path";
 import { cache } from "react";
@@ -11,21 +10,22 @@ const fontPaths = {
 	notosans: path.join(process.cwd(), "public", "fonts", "NotoSansSC.ttf"),
 };
 
-// System fonts configuration
-export const fontSans = FontSans({
-	subsets: ["latin"],
+export const fontSans = localFont({
+	src: "../public/fonts/Inter_18pt-Regular.ttf",
 	variable: "--font-sans",
 	display: "swap",
 	preload: true,
-	adjustFontFallback: true, // Automatically handles fallback fonts
+	weight: "400",
+	style: "normal",
 });
 
-export const fontMono = FontMono({
-	subsets: ["latin"],
+export const fontMono = localFont({
+	src: "../public/fonts/geneva-9.ttf",
 	variable: "--font-mono",
 	display: "swap",
 	preload: true,
-	adjustFontFallback: true,
+	weight: "400",
+	style: "normal",
 });
 
 // Display fonts configuration
