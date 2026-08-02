@@ -1,13 +1,11 @@
 services:
   postgres:
     # Production hardening for a single-host Pi deployment:
-    # don't expose Postgres to your LAN by default.
-    ports:
-      - "127.0.0.1:5432:5432"
+    # don't publish Postgres on the host. The app reaches it over byos_network.
+    ports: !override []
 
   byos-next:
     # `docker-compose.yml` hard-codes BETTER_AUTH_URL to localhost.
     # Override it so you can set it in `.env` (e.g. http://<pi-ip>:3000 or https://byos.yourdomain.com).
     environment:
       BETTER_AUTH_URL: ${BETTER_AUTH_URL}
-
