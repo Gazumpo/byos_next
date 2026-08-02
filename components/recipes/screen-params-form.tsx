@@ -71,6 +71,8 @@ const renderField = (
 	switch (definition.type) {
 		case "number":
 			return <Input type="number" {...commonProps} />;
+		case "date":
+			return <Input type="date" {...commonProps} />;
 		default:
 			return <Input type="text" {...commonProps} />;
 	}

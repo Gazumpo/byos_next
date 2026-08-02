@@ -10,6 +10,9 @@ services:
       - /app/node_modules
       - /app/.next
     environment:
+      # Allow pnpm to refresh a stale node_modules volume without an
+      # interactive confirmation when the image or lockfile changes.
+      - CI=true
       - NODE_ENV=development
       - HOSTNAME=0.0.0.0
       - CHOKIDAR_USEPOLLING=1

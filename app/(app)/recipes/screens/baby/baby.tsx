@@ -1,49 +1,94 @@
 import { PreSatori } from "@/utils/pre-satori";
 import { pregnancyDayUpdate } from "./pregnancyDayUpdate";
 import { pregnancySizeComparisonByDay } from "./pregnancySizeComparisonByDay";
-import { pregnancyNameSuggestionByDay } from "./pregnancyNameSuggestionByDay";
 
 interface BabyProps {
 	width?: number;
 	height?: number;
+	params?: {
+		babyName?: unknown;
+		dueDate?: unknown;
+		timeZone?: unknown;
+	};
 }
 
-const START_DATE = new Date("2025-12-08T00:00:00");
-const END_DATE = new Date("2026-09-14T00:00:00");
+const DEFAULT_BABY_NAME = "Baby Finn Toa Lovie";
+const DEFAULT_DUE_DATE = "2026-09-14";
+const DEFAULT_TIME_ZONE = "Australia/Perth";
+const PREGNANCY_DAYS = 280;
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 
-const nameSuggestions = Object.values(pregnancyNameSuggestionByDay).filter(
-	(name) => typeof name === "string" && name.trim().length > 0,
-);
+function parseDate(value: unknown) {
+	const dateValue =
+		typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+			? value
+			: DEFAULT_DUE_DATE;
+	const [year, month, day] = dateValue.split("-").map(Number);
+	const date = new Date(Date.UTC(year, month - 1, day));
+	const isValidDate =
+		date.getUTCFullYear() === year &&
+		date.getUTCMonth() === month - 1 &&
+		date.getUTCDate() === day;
 
-function pickRandom<T>(items: T[]) {
-	return items[Math.floor(Math.random() * items.length)];
+	return isValidDate ? date : new Date(`${DEFAULT_DUE_DATE}T00:00:00Z`);
 }
 
-function toStartOfDay(date: Date) {
-	return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+function parseTimeZone(value: unknown) {
+	const timeZone =
+		typeof value === "string" && value.trim()
+			? value.trim()
+			: DEFAULT_TIME_ZONE;
+
+	try {
+		new Intl.DateTimeFormat("en-AU", { timeZone }).format(0);
+		return timeZone;
+	} catch {
+		return DEFAULT_TIME_ZONE;
+	}
 }
 
-function diffInDays(from: Date, to: Date) {
-	const start = toStartOfDay(from).getTime();
-	const end = toStartOfDay(to).getTime();
-	const msPerDay = 24 * 60 * 60 * 1000;
-	return Math.round((end - start) / msPerDay);
+function getCalendarDayNumber(date: Date, timeZone: string) {
+	const dateParts = new Intl.DateTimeFormat("en-AU", {
+		timeZone,
+		year: "numeric",
+		month: "numeric",
+		day: "numeric",
+	}).formatToParts(date);
+	const year = Number(dateParts.find((part) => part.type === "year")?.value);
+	const month = Number(dateParts.find((part) => part.type === "month")?.value);
+	const day = Number(dateParts.find((part) => part.type === "day")?.value);
+
+	return Math.floor(Date.UTC(year, month - 1, day) / MILLISECONDS_PER_DAY);
 }
 
-export default function Baby({ width = 800, height = 480 }: BabyProps) {
+function getUtcCalendarDayNumber(date: Date) {
+	return Math.floor(date.getTime() / MILLISECONDS_PER_DAY);
+}
+
+export default function Baby({ width = 800, height = 480, params }: BabyProps) {
 	const today = new Date();
-	const totalDays = Math.max(0, diffInDays(START_DATE, END_DATE));
-	const cookedDaysRaw = diffInDays(START_DATE, today);
+	const babyName =
+		typeof params?.babyName === "string" && params.babyName.trim()
+			? params.babyName.trim()
+			: DEFAULT_BABY_NAME;
+	const dueDate = parseDate(params?.dueDate);
+	const timeZone = parseTimeZone(params?.timeZone);
+	const dueDay = getUtcCalendarDayNumber(dueDate);
+	const startDay = dueDay - PREGNANCY_DAYS;
+	const totalDays = dueDay - startDay;
+	const cookedDaysRaw = getCalendarDayNumber(today, timeZone) - startDay;
 	const cookedDays = Math.min(Math.max(cookedDaysRaw, 0), totalDays);
-	const remainingDays = Math.max(totalDays - cookedDays, 0);
 	const cookedWeeks = Math.floor(cookedDays / 7);
 	const cookedExtraDays = cookedDays % 7;
-	const remainingWeeks = Math.floor(remainingDays / 7);
-	const remainingExtraDays = remainingDays % 7;
 	const progress = totalDays > 0 ? cookedDays / totalDays : 0;
 	const dayUpdate = pregnancyDayUpdate[cookedDays];
 	const weekSize = pregnancySizeComparisonByDay[cookedDays];
-	const suggestedName = pickRandom(nameSuggestions);
+	const formattedDueDate = dueDate.toLocaleDateString("en-AU", {
+		day: "numeric",
+		month: "short",
+		year: "numeric",
+		timeZone: "UTC",
+	});
 
 	const progressPercent = Math.round(progress * 100);
 	const barWidth = 280;
@@ -53,8 +98,8 @@ export default function Baby({ width = 800, height = 480 }: BabyProps) {
 		<PreSatori useDoubling={true} width={width} height={height}>
 			<div className="flex h-full w-full flex-col bg-white p-6 text-black font-inter">
 				<div className="flex items-center justify-between border-b-2 border-black pb-3">
-					<div className="text-4xl">Baby Gino</div>
-					<div className="text-xl"></div>
+					<div className="text-4xl">{babyName}</div>
+					<div className="text-xl">Due {formattedDueDate}</div>
 				</div>
 
 				<div className="flex flex-1 items-start justify-between gap-6">
@@ -79,7 +124,7 @@ export default function Baby({ width = 800, height = 480 }: BabyProps) {
 										fill="#000000"
 									/>
 								</svg>
-								<div>Size of a {weekSize}!</div>
+								<div>About the size of {weekSize}.</div>
 							</div>
 						)}
 					</div>
@@ -97,17 +142,6 @@ export default function Baby({ width = 800, height = 480 }: BabyProps) {
 								style={{ width: `${progressPercent}%` }}
 							/>
 						</div>
-						{suggestedName && (
-							<div
-								className="border-1 border-black rounded-md p-3 mt-22"
-								style={{ width: barWidth }}
-							>
-								<div className="text-xl font-semibold">How about...</div>
-								<div className="text-4xl font-semibold leading-none mt-1">
-									{suggestedName}??
-								</div>
-							</div>
-						)}
 					</div>
 				</div>
 			</div>

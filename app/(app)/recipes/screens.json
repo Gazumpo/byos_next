@@ -124,12 +124,33 @@
 		"title": "Baby Countdown",
 		"published": true,
 		"createdAt": "2026-02-07T00:00:00Z",
-		"updatedAt": "2026-02-07T00:00:00Z",
-		"description": "Shows weeks cooked since Dec 10, 2025 and weeks to go until Sep 14, 2026 with a cooked vs remaining pie chart.",
+		"updatedAt": "2026-08-02T00:00:00Z",
+		"description": "Shows pregnancy progress and a size comparison for a configurable baby name and due date.",
 		"componentPath": "./screens/baby",
 		"hasDataFetch": false,
 		"props": {},
-		"params": {},
+		"params": {
+			"babyName": {
+				"type": "string",
+				"label": "Baby name",
+				"description": "The title shown at the top of the baby countdown.",
+				"default": "Baby Finn Toa Lovie",
+				"placeholder": "Baby Finn Toa Lovie"
+			},
+			"dueDate": {
+				"type": "date",
+				"label": "Due date",
+				"description": "The expected due date used to calculate pregnancy progress.",
+				"default": "2026-09-14"
+			},
+			"timeZone": {
+				"type": "string",
+				"label": "Time zone",
+				"description": "The IANA time zone used to change the pregnancy day at local midnight.",
+				"default": "Australia/Perth",
+				"placeholder": "Australia/Perth"
+			}
+		},
 		"tags": ["countdown", "progress", "chart", "display"],
 		"author": {
 			"name": "graeme",
@@ -138,7 +159,54 @@
 		"renderSettings": {
 			"doubleSizeForSharperText": true
 		},
-		"version": "0.1.0",
+		"version": "0.3.0",
+		"category": "display-components"
+	},
+	"baby-age": {
+		"title": "Baby Age & Development",
+		"published": true,
+		"createdAt": "2026-07-19T00:00:00Z",
+		"updatedAt": "2026-08-02T00:00:00Z",
+		"description": "Shows a baby's age and a daily age-aware note about development, play, cues, safety, or parent reassurance.",
+		"componentPath": "./screens/baby-age",
+		"hasDataFetch": true,
+		"props": {
+			"babyName": "Finn Toa Lovie",
+			"birthDateLabel": "14 Sep 2026",
+			"ageLabel": "Birth date is in the future",
+			"dailyNote": "Daily age-aware notes will begin on the birth date."
+		},
+		"params": {
+			"babyName": {
+				"type": "string",
+				"label": "Baby's name",
+				"description": "The name shown at the top of the screen.",
+				"default": "Finn Toa Lovie",
+				"placeholder": "Finn Toa Lovie"
+			},
+			"birthDate": {
+				"type": "date",
+				"label": "Birth date",
+				"description": "The baby's date of birth, used to calculate their age and development stage.",
+				"default": "2026-09-14"
+			},
+			"timeZone": {
+				"type": "string",
+				"label": "Time zone",
+				"description": "The IANA time zone used to change the baby's age and daily fact at local midnight.",
+				"default": "Australia/Perth",
+				"placeholder": "Australia/Perth"
+			}
+		},
+		"tags": ["baby", "age", "development", "ai", "configurable"],
+		"author": {
+			"name": "graeme",
+			"github": ""
+		},
+		"renderSettings": {
+			"doubleSizeForSharperText": true
+		},
+		"version": "0.3.0",
 		"category": "display-components"
 	},
 	"word": {
